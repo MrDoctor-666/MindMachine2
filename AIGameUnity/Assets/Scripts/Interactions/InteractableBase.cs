@@ -12,7 +12,11 @@ public class InteractableBase : MonoBehaviour, IInteractable
     [SerializeField] private string tooltipMessage = "Interact";
 
     public bool MultipleUse => multipleUse;
-    public bool IsInteractable => isInteractable;
+    public bool IsInteractable
+    {
+        get => isInteractable;
+        set => isInteractable = value;
+    }
     public bool IsPortable => isPortable;
     public bool CanBePutOn => canBePutOn;
     public bool CameraApproach => cameraApproach;

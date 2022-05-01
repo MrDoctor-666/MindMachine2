@@ -17,11 +17,12 @@ public class SaveManager: MonoBehaviour
     [SerializeField] private Inventory inventory;
     [SerializeField] private Roboarm roboArmScript;
     [SerializeField] private GameObject[] tosterThoughts;
+    [SerializeField] private DialogueTrigger[] dialogues;
 
     private void Start()
     {
-      // PlayerPrefs.DeleteAll();
-                  Load();
+       PlayerPrefs.DeleteAll();
+     // Load();
     }
 
     public void Save()
@@ -30,12 +31,11 @@ public class SaveManager: MonoBehaviour
         SaveDevicesTransforms();
         SaveArray(GameInfo.devices, "activeDevices");
         SaveArray(tosterThoughts, "tosterThoughts");
+        SaveArray(dialogues, "dialogues");
+ //  PlayerPrefs.SetString("dialogue", JsonUtility.ToJson(dialogue, true));
+   //print(PlayerPrefs.GetString("dialogue"));
         PlayerPrefs.SetString("tasks", JsonUtility.ToJson(taskManager.taskList, true));
-        // PlayerPrefs.SetString("dictionary",JsonConvert.SerializeObject(inventory.dictionary, Formatting.Indented, new JsonSerializerSettings()
-        // { 
-        //     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-        // }));
-        // print(PlayerPrefs.GetString("dictionary"));
+     
         SaveObjectInfo(inventory.dictionary[1], "roboarm1");
         SaveObjectInfo(inventory.dictionary[2], "roboarm2");
         SaveObjectInfo(inventory.objectToSaveOnDelivery, "deliveryBotInventory");
@@ -80,6 +80,7 @@ public class SaveManager: MonoBehaviour
 
     public void Load()
     {
+
         LoadTasks();
         LoadDevicesTransfrom();
         // if (!String.IsNullOrEmpty(PlayerPrefs.GetString("roboArmInventory")))
@@ -100,7 +101,23 @@ public class SaveManager: MonoBehaviour
      }
      
         LoadArray(GameInfo.devices, "activeDevices");
-        LoadArray(tosterThoughts, "tosterThoughts");
+        LoadArray(tosterThoughts, "tosterThoughts"); 
+      //  EditorJsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("dialogue"), dialogue);
+      
+      DialogueTrigger d;
+      
+      for (int i = 0; i < dialogues.Length; i++)
+          
+      { print(JsonConvert.DeserializeObject<DialogueTrigger>(PlayerPrefs.GetString("dialogues"+i)).IsInteractable);
+          print(PlayerPrefs.GetString("dialogues"+i));
+           d = JsonConvert.DeserializeObject<DialogueTrigger>(PlayerPrefs.GetString("dialogues"+i));
+          print(d.IsInterac table);
+          dialogues[i].IsInteractable = d.IsInteractable;
+      }
+      
+    // DialogueTrigger d = JsonConvert.DeserializeObject<DialogueTrigger>(PlayerPrefs.GetString("dialogue"));
+    // dialogue.IsInteractable= d.IsInteractable;
+      //  LoadArray(dialogues, "dialogues");
 
         if (PlayerPrefs.HasKey("tasks"))
         {
