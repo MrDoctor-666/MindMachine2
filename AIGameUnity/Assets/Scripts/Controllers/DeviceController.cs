@@ -55,6 +55,10 @@ public class DeviceController : MonoBehaviour
         device.GetComponentInChildren<AudioListener>().enabled = true;
         if (currentDevice.tag == "Bug") currentDevice.GetComponent<Rigidbody>().freezeRotation = false;
         if (device.tag == "Bug") device.GetComponent<Rigidbody>().freezeRotation = true;
+        //canvases
+        if (device.GetComponentInChildren<Canvas>(true)) device.GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
+        if (currentDevice.GetComponentInChildren<Canvas>(true)) currentDevice.GetComponentInChildren<Canvas>(true).gameObject.SetActive(false);
+
         currentDevice = device;
         GameInfo.currentDevice = currentDevice;
     }

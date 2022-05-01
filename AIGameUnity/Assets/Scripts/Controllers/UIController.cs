@@ -95,6 +95,7 @@ public class UIController : MonoBehaviour
     {
         ErrorBuyPanel.SetActive(true);
         currentOpen = ErrorBuyPanel;
+        GameInfo.currentDevice.GetComponentInChildren<Canvas>(true).gameObject.SetActive(false);
     }
 
     public void OnBuyTry(GameObject device)
@@ -103,18 +104,21 @@ public class UIController : MonoBehaviour
         currentOpen = ConfirmBuyPanel;
         interactionText.text = "";
         InteractionData.Reset();
+        GameInfo.currentDevice.GetComponentInChildren<Canvas>(true).gameObject.SetActive(false);
     }
 
     public void OnPanelOpened(GameObject panel)
     {
         currentOpen = panel;
         panel.SetActive(true);
+        GameInfo.currentDevice.GetComponentInChildren<Canvas>(true).gameObject.SetActive(false);
     }
 
     public void OnPanelClosed()
     {
         currentOpen.SetActive(false);
         currentOpen = null;
+        GameInfo.currentDevice.GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
     }
 
     public void OnTab(InputAction.CallbackContext context)
@@ -128,6 +132,7 @@ public class UIController : MonoBehaviour
     {
         mainGameCanvas.gameObject.SetActive(false);
         puzzleCanvas.gameObject.SetActive(true);
+        GameInfo.currentDevice.GetComponentInChildren<Canvas>(true).gameObject.SetActive(false);
     }
 
     void TurnOnAllUI(PuzzleEnd puzzEnd)
@@ -135,6 +140,7 @@ public class UIController : MonoBehaviour
         mainGameCanvas.gameObject.SetActive(true);
         puzzleCanvas.gameObject.SetActive(false);
         EventAggregator.PanelClosed.Publish();
+        GameInfo.currentDevice.GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
     }
 
     void End()
