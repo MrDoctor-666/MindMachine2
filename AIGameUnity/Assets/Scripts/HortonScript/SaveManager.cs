@@ -1,12 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEditor;
 using UnityEngine;
-using Object = System.Object;
 using Newtonsoft.Json;
-
 
 public class SaveManager: MonoBehaviour
 {
@@ -22,7 +17,7 @@ public class SaveManager: MonoBehaviour
     private void Start()
     {
        PlayerPrefs.DeleteAll();
-     // Load();
+       // Load();
     }
 
     public void Save()
@@ -31,21 +26,21 @@ public class SaveManager: MonoBehaviour
         SaveDevicesTransforms();
         SaveArray(GameInfo.devices, "activeDevices");
         SaveArray(tosterThoughts, "tosterThoughts");
-        SaveArray(dialogues, "dialogues");
- //  PlayerPrefs.SetString("dialogue", JsonUtility.ToJson(dialogue, true));
-   //print(PlayerPrefs.GetString("dialogue"));
-        PlayerPrefs.SetString("tasks", JsonUtility.ToJson(taskManager.taskList, true));
-     
+        // SaveArray(dialogues, "dialogues");
         SaveObjectInfo(inventory.dictionary[1], "roboarm1");
         SaveObjectInfo(inventory.dictionary[2], "roboarm2");
         SaveObjectInfo(inventory.objectToSaveOnDelivery, "deliveryBotInventory");
-      //  SaveObjectInfo(inventory.dictionary, "roboArmInventory");
         SaveObjectInfo(GameInfo.currentDevice, "currDevice");
-      
+        SaveDialogues(); // check this
+
         PlayerPrefs.Save();
     }
 
-    private void SaveTasks() => PlayerPrefs.SetInt("CurrentDay", daysController.currentDay);
+    private void SaveTasks()
+    {
+        PlayerPrefs.SetInt("CurrentDay", daysController.currentDay);
+        PlayerPrefs.SetString("tasks", JsonUtility.ToJson(taskManager.taskList, true));
+    }
     
     private void SaveDevicesTransforms()
     {
@@ -65,82 +60,46 @@ public class SaveManager: MonoBehaviour
         PlayerPrefs.SetString("BeatleRotation", $"{T.eulerAngles.x} {T.eulerAngles.y} {T.eulerAngles.z}");
     }
 
-    private void SaveObjectInfo<M>(M obj, string key)
-    {
-        PlayerPrefs.SetString(key, EditorJsonUtility.ToJson(obj));
-    }
+    private void SaveObjectInfo<M>(M obj, string key) => PlayerPrefs.SetString(key, EditorJsonUtility.ToJson(obj));
+
     //todo возможно не нужна вообще, а просто переделать под Json-ToJson 
     private void SaveArray<M>(M[] obj, string key)
     {
         for (int i = 0; i < obj.Length; i++)
-        {
             PlayerPrefs.SetString(key+i, EditorJsonUtility.ToJson(obj[i]));
-        }
+    }
+
+    private void SaveDialogues()
+    {
+        for (int i = 0; i < dialogues.Length; ++i)
+            PlayerPrefs.SetInt($"dialogue{i}", dialogues[i].IsInteractable ? 1 : 0);
     }
 
     public void Load()
     {
-
         LoadTasks();
         LoadDevicesTransfrom();
-        // if (!String.IsNullOrEmpty(PlayerPrefs.GetString("roboArmInventory")))
-        // {
-        //     inventory.dictionary = (Dictionary<int, GameObject>) LoadObjectInfo(inventory.dictionary, "roboArmInventory");
-        // }
-
-     //   inventory.dictionary = JsonConvert.DeserializeObject<Dictionary<int, GameObject>>(PlayerPrefs.GetString("dictionary"));
-     if (!String.IsNullOrEmpty(PlayerPrefs.GetString("roboarm1")))
-     {
-         inventory.dictionary[1] = new GameObject();
-         inventory.dictionary[1] = (GameObject) LoadObjectInfo(inventory.dictionary[1], "roboarm1");
-     }
-     if (!String.IsNullOrEmpty(PlayerPrefs.GetString("roboarm2")))
-     {
-         inventory.dictionary[2] = new GameObject();
-         inventory.dictionary[2] = (GameObject) LoadObjectInfo(inventory.dictionary[2], "roboarm2");
-     }
-     
+        LoadRoboArmInventory();
+        LoadDeliveryBotInventory();
+        LoadCurrentDevice();
+        LoadDialoguesState(); // check this
         LoadArray(GameInfo.devices, "activeDevices");
-        LoadArray(tosterThoughts, "tosterThoughts"); 
-      //  EditorJsonUtility.FromJsonOverwrite(PlayerPrefs.GetString("dialogue"), dialogue);
-      
-      DialogueTrigger d;
-      
-      for (int i = 0; i < dialogues.Length; i++)
-          
-      { print(JsonConvert.DeserializeObject<DialogueTrigger>(PlayerPrefs.GetString("dialogues"+i)).IsInteractable);
-          print(PlayerPrefs.GetString("dialogues"+i));
-           d = JsonConvert.DeserializeObject<DialogueTrigger>(PlayerPrefs.GetString("dialogues"+i));
-          print(d.IsInteractable);
-          dialogues[i].IsInteractable = d.IsInteractable;
-      }
-      
-    // DialogueTrigger d = JsonConvert.DeserializeObject<DialogueTrigger>(PlayerPrefs.GetString("dialogue"));
-    // dialogue.IsInteractable= d.IsInteractable;
-      //  LoadArray(dialogues, "dialogues");
-
-        if (PlayerPrefs.HasKey("tasks"))
-        {
-            taskManager.taskList =  JsonUtility.FromJson<List<TaskSO>>(PlayerPrefs.GetString("tasks"));
-        }
-        if (!String.IsNullOrEmpty(PlayerPrefs.GetString("deliveryBotInventory")))
-        {
-            inventory.objectToSaveOnDelivery = new GameObject();
-            inventory.objectToSaveOnDelivery = (GameObject) LoadObjectInfo(inventory.objectToSaveOnDelivery, "deliveryBotInventory");
-        }
-        
-       if (!String.IsNullOrEmpty(PlayerPrefs.GetString("currDevice")))
-       {
-           EventAggregator.DeviceSwitched.Publish( GameInfo.currentDevice = (GameObject) LoadObjectInfo(GameInfo.currentDevice, "currDevice"));
-       }
-
-
+        LoadArray(tosterThoughts, "tosterThoughts");
     }
 
     private void LoadTasks()
     {
         EventAggregator.newDayStarted.Publish(daysController.currentDay = PlayerPrefs.HasKey("CurrentDay") ? PlayerPrefs.GetInt("CurrentDay") : 1);
         daysController.ObjectStateChange();
+
+        if (PlayerPrefs.HasKey("tasks"))
+            taskManager.taskList = JsonUtility.FromJson<List<TaskSO>>(PlayerPrefs.GetString("tasks"));
+    }
+
+    private void LoadCurrentDevice()
+    {
+        if (PlayerPrefs.HasKey("currDevice") && !string.IsNullOrEmpty(PlayerPrefs.GetString("currDevice")))
+            EventAggregator.DeviceSwitched.Publish(GameInfo.currentDevice = LoadObjectInfo(GameInfo.currentDevice, "currDevice"));
     }
 
     private void LoadDevicesTransfrom()
@@ -164,27 +123,63 @@ public class SaveManager: MonoBehaviour
             values = PlayerPrefs.GetString("BeatleRotation").Split(' ');
             beatle.transform.rotation = Quaternion.Euler(new Vector3(float.Parse(values[0]), float.Parse(values[1]), float.Parse(values[2])));
         }
-        catch
+        catch { Debug.LogError("SaveManager.LoadDevicesTransfrom(): no data about devices to load"); }
+    }
+
+    private void LoadRoboArmInventory()
+    {
+        if (!(PlayerPrefs.HasKey("roboarm1") && PlayerPrefs.HasKey("roboarm2")))
+            return;
+
+        if (!string.IsNullOrEmpty(PlayerPrefs.GetString("roboarm1")))
         {
-            Debug.LogError("No data about devices to load");
+            inventory.dictionary[1] = new GameObject();
+            inventory.dictionary[1] = LoadObjectInfo(inventory.dictionary[1], "roboarm1");
+        }
+        if (!string.IsNullOrEmpty(PlayerPrefs.GetString("roboarm2")))
+        {
+            inventory.dictionary[2] = new GameObject();
+            inventory.dictionary[2] = LoadObjectInfo(inventory.dictionary[2], "roboarm2");
         }
     }
 
-    private object LoadObjectInfo <H>(H obj, string key)
+    private void LoadDeliveryBotInventory()
+    {
+        if (PlayerPrefs.HasKey("deliveryBotInventory") && !string.IsNullOrEmpty(PlayerPrefs.GetString("deliveryBotInventory")))
+        {
+            inventory.objectToSaveOnDelivery = new GameObject();
+            inventory.objectToSaveOnDelivery = LoadObjectInfo(inventory.objectToSaveOnDelivery, "deliveryBotInventory");
+        }
+    }
+
+    private void LoadDialoguesState()
+    {
+        //if (PlayerPrefs.HasKey("dialogues"))
+        //    for (int i = 0; i < dialogues.Length; i++)
+        //    {
+        //        DialogueTrigger d = JsonConvert.DeserializeObject<DialogueTrigger>(PlayerPrefs.GetString("dialogues" + i));
+        //        dialogues[i].IsInteractable = d.IsInteractable;
+        //    }
+
+        for (int i = 0; i < dialogues.Length; ++i)
+        {
+            if (!PlayerPrefs.HasKey($"dialogue{i}"))
+                Debug.LogError("SaveManager.LoadDialogueState(): no data about dialogue to load");
+
+            dialogues[i].IsInteractable = PlayerPrefs.GetInt($"dialogue{i}") == 1;
+        }
+    }
+
+    private GameObject LoadObjectInfo <H>(H obj, string key)
     { 
         EditorJsonUtility.FromJsonOverwrite(PlayerPrefs.GetString(key), obj);
-        print(PlayerPrefs.GetString(key));
-        
-        return  GameObject.Find((obj as GameObject).name);
+
+        return obj as GameObject;
     }
     
     private void LoadArray <H>(H[] obj, string key)
     {
-
-        for (int i = 0; i < obj.Length; i++)
-        {
+        for (int i = 0; i < obj.Length; i++) 
             EditorJsonUtility.FromJsonOverwrite(PlayerPrefs.GetString(key+i), obj[i]);
-        }
-       
     }
 }
