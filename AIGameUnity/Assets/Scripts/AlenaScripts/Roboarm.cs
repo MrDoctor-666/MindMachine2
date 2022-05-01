@@ -48,6 +48,7 @@ public class Roboarm : MonoBehaviour
         deviceInteraction = GetComponent<DeviceInteraction>();
         onClickDevice = GetComponent<OnClickDevice>();
         deviceInfo = gameObject.GetComponent<DeviceInfo>();
+        GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
 
         moveInputAction = playerInput.currentActionMap.FindAction("Move");
         mouseXAction = playerInput.currentActionMap.FindAction("MouseX");
@@ -69,6 +70,7 @@ public class Roboarm : MonoBehaviour
 
         GetComponentInChildren<Text>().enabled = false;
         GetComponentInChildren<Image>().enabled = false;
+        GetComponentInChildren<Canvas>().gameObject.SetActive(false);
 
         splinesOfRails = new BezierSpline[2];
         maxInteractDistance = onClickDevice.InteractionRadius;
