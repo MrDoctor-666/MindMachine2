@@ -111,7 +111,7 @@ public class SaveManager: MonoBehaviour
       { print(JsonConvert.DeserializeObject<DialogueTrigger>(PlayerPrefs.GetString("dialogues"+i)).IsInteractable);
           print(PlayerPrefs.GetString("dialogues"+i));
            d = JsonConvert.DeserializeObject<DialogueTrigger>(PlayerPrefs.GetString("dialogues"+i));
-          print(d.IsInterac table);
+          print(d.IsInteractable);
           dialogues[i].IsInteractable = d.IsInteractable;
       }
       
