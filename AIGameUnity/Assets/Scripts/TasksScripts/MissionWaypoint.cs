@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +13,21 @@ public class MissionWaypoint : MonoBehaviour
     // To adjust the position of the icon
     public Vector3 offset;
     private Camera _camera;
+
+    private void Awake()
+    {
+        EventAggregator.changeMissionWaypoint.Subscribe(RefreshTransformWaypoint);
+    }
+
     private void Update()
     {
+        if (target.Equals(null))
+        {
+            img.enabled = false;
+            return;
+        }
+        img.enabled = true;
+
        _camera = GameInfo.currentDevice.GetComponentInChildren<Camera>();
         // Giving limits to the icon so it sticks on the screen
         // Below calculations witht the assumption that the icon anchor point is in the middle
@@ -29,7 +43,7 @@ public class MissionWaypoint : MonoBehaviour
         
 
         // Temporary variable to store the converted position from 3D world point to 2D screen point
-        Vector2 pos =  GameInfo.currentDevice.GetComponentInChildren<Camera>().WorldToScreenPoint(target.position + offset);
+        Vector2 pos = _camera.WorldToScreenPoint(target.position + offset);
 
         
             if(Vector3.Dot((target.position - _camera.transform.position), _camera.transform.forward) < 0)
@@ -59,4 +73,11 @@ public class MissionWaypoint : MonoBehaviour
         img.transform.position = pos;
         
     }
+
+    private void RefreshTransformWaypoint(Transform transform, Vector3 offset)
+    {
+        target = transform;
+        this.offset = offset;
+    }
+
 }

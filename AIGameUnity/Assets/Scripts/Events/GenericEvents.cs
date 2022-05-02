@@ -18,6 +18,21 @@ public class EventOneParam<T>
             callback(obj);
     }
 }
+public class EventTwoParam<T, V>
+{
+    private readonly List<Action<T, V>> _callbacks = new List<Action<T, V>>();
+
+    public void Subscribe(Action<T, V> callback)
+    {
+        _callbacks.Add(callback);
+    }
+
+    public void Publish(T obj, V obj2)
+    {
+        foreach (Action<T, V> callback in _callbacks)
+            callback(obj, obj2);
+    }
+}
 
 public class EventNoParam
 {

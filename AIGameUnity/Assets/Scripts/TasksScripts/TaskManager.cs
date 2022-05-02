@@ -61,7 +61,7 @@ public class TaskManager : MonoBehaviour
         //Пока пусть удаление будет происходить по ID, возможно можно будет просто делать удаление верхнего (pop) элемента, т.к. он активный только
         taskList.Remove(taskSo);
         SortList();
-
+        ChangeMissionWaypoint(taskList[0]);
         ShowText();
         //todo возможно надо делать сортировку после каждого удаление/добавление, но производительность...
     }
@@ -84,7 +84,7 @@ public class TaskManager : MonoBehaviour
         }
 
         SortList();
-
+        ChangeMissionWaypoint(taskList[0]);
         ShowText();
     }
 
@@ -107,6 +107,28 @@ public class TaskManager : MonoBehaviour
     {
         taskList.Sort(myCompare.Compare);
     }
+
+    public void ChangeMissionWaypoint(TaskSO taskSo)
+    {
+        foreach (var taskTransform in tasksTransformDictionary)
+        {
+            if (taskTransform.taskSo.Equals(taskSo))
+            {
+                EventAggregator.changeMissionWaypoint.Publish(taskTransform.transform, taskTransform.offset);
+            }
+    
+        }
+    }
+
+    [Serializable]
+    public class DictionaryTaskTransform
+    {
+        public TaskSO taskSo;
+        public Transform transform;
+        public Vector3 offset;
+    }
+    
+    [SerializeField] private DictionaryTaskTransform[] tasksTransformDictionary;
 }
 
 public class MyCompare<T> : IComparer<T> where T : TaskSO

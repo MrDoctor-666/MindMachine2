@@ -71,6 +71,7 @@ public class EventAggregator
     public static EventOneParam<int> taskListAdd = new EventOneParam<int>();
     public static EventNoParam takenObject = new EventNoParam();
     public static EventOneParam<TaskSO> addTask = new EventOneParam<TaskSO>();
+    public static EventTwoParam<Transform, Vector3> changeMissionWaypoint = new EventTwoParam<Transform, Vector3>();
 
     //endGame
     public static EventNoParam endGame = new EventNoParam();
