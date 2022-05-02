@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03d155e993eea544483475db92c1bce2, type: 3}
-  m_Name: 2HackBugTask
+  m_Name: 09TakeTask
   m_EditorClassIdentifier: 
-  taskInfo: "\u0417\u0430\u0445\u0432\u0430\u0442\u0438\u0442\u044C \u0436\u0443\u0447\u043A\u0430"
-  firstAvailableDay: 2
-  lastAvailableDay: 6
-  id: 2
+  taskInfo: "\u0412\u0437\u044F\u0442\u044C \u0436\u0443\u0447\u043A\u0430 \u0440\u0443\u043A\u043E\u0439"
+  firstAvailableDay: 3
+  lastAvailableDay: 3
   priority: 2
-  diaryInfo: Info in diary after complete task
-  isComplete: 0
+  diaryInfo: "\u041B\u044F\u043B\u044F"
