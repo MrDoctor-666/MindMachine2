@@ -16,8 +16,8 @@ public class SaveManager: MonoBehaviour
 
     private void Start()
     {
-       PlayerPrefs.DeleteAll();
-       // Load();
+        PlayerPrefs.DeleteAll();
+      // Load();
     }
 
     public void Save()
@@ -25,8 +25,7 @@ public class SaveManager: MonoBehaviour
         SaveTasks();
         SaveDevicesTransforms();
         SaveArray(GameInfo.devices, "activeDevices");
-        SaveArray(tosterThoughts, "tosterThoughts");
-        // SaveArray(dialogues, "dialogues");
+        SaveThoughts(tosterThoughts, "tosterThoughts");
         SaveObjectInfo(inventory.dictionary[1], "roboarm1");
         SaveObjectInfo(inventory.dictionary[2], "roboarm2");
         SaveObjectInfo(inventory.objectToSaveOnDelivery, "deliveryBotInventory");
@@ -60,13 +59,35 @@ public class SaveManager: MonoBehaviour
         PlayerPrefs.SetString("BeatleRotation", $"{T.eulerAngles.x} {T.eulerAngles.y} {T.eulerAngles.z}");
     }
 
-    private void SaveObjectInfo<M>(M obj, string key) => PlayerPrefs.SetString(key, EditorJsonUtility.ToJson(obj));
+    private void SaveObjectInfo<M>(M obj, string key)
+    {
+        PlayerPrefs.SetString(key, EditorJsonUtility.ToJson(obj));
+        print(PlayerPrefs.GetString(key));
+    }
 
     //todo возможно не нужна вообще, а просто переделать под Json-ToJson 
     private void SaveArray<M>(M[] obj, string key)
     {
         for (int i = 0; i < obj.Length; i++)
-            PlayerPrefs.SetString(key+i, EditorJsonUtility.ToJson(obj[i]));
+        {
+            PlayerPrefs.SetString(key+i, JsonUtility.ToJson(obj[i]));
+            print(PlayerPrefs.GetString(key+i));
+        }
+    }
+    private void SaveThoughts(GameObject[] obj, string key)
+    {
+        for (int i = 0; i < obj.Length; i++)
+        {
+            if (obj[i].gameObject.activeSelf)
+            {
+                PlayerPrefs.SetInt(key+i, 1);
+            }
+            else
+            {
+                PlayerPrefs.SetInt(key+i, 0);
+            }
+            print(PlayerPrefs.GetInt(key+i));
+        }
     }
 
     private void SaveDialogues()
@@ -84,7 +105,7 @@ public class SaveManager: MonoBehaviour
         LoadCurrentDevice();
         LoadDialoguesState(); // check this
         LoadArray(GameInfo.devices, "activeDevices");
-        LoadArray(tosterThoughts, "tosterThoughts");
+        LoadThoughts(tosterThoughts, "tosterThoughts");
     }
 
     private void LoadTasks()
@@ -179,7 +200,26 @@ public class SaveManager: MonoBehaviour
     
     private void LoadArray <H>(H[] obj, string key)
     {
-        for (int i = 0; i < obj.Length; i++) 
-            EditorJsonUtility.FromJsonOverwrite(PlayerPrefs.GetString(key+i), obj[i]);
+        for (int i = 0; i < obj.Length; i++)
+        {
+            JsonUtility.FromJsonOverwrite(PlayerPrefs.GetString(key+i), obj[i]);
+        }
+
+    }
+    private void LoadThoughts(GameObject[] obj, string key)
+    {
+        for (int i = 0; i < obj.Length; i++)
+        {
+            if (PlayerPrefs.GetInt(key+i) == 1)
+            {
+                obj[i].SetActive(true);
+            }
+            else
+            {
+                obj[i].SetActive(false);
+            }
+            print(PlayerPrefs.GetInt(key+i));
+        }
+
     }
 }
