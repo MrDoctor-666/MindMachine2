@@ -578,10 +578,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Puzzle0
       objectReference: {fileID: 0}
-    - target: {fileID: 7276865036371072774, guid: c327a8079f88f434799d8ecc5d0ba414, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7276865036371073017, guid: c327a8079f88f434799d8ecc5d0ba414, type: 3}
       propertyPath: m_RootOrder
       value: 2
