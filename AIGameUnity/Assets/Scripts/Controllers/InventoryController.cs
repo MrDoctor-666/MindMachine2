@@ -62,6 +62,7 @@ public class InventoryController : MonoBehaviour
                 {
                     inventory.dictionary[roboArmScript.id] = hit.collider.gameObject;
                     inventory.dictionary[roboArmScript.id].SetActive(false);
+                    EventAggregator.takenObject.Publish();
                     //публикация взятия объекта для задания
                     EventAggregator.getObjectEvent.Publish();
                     Debug.Log("Взяли объект");
