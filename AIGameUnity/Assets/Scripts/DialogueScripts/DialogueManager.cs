@@ -12,7 +12,9 @@ public class DialogueManager : MonoBehaviour
     [HideInInspector] public bool isInMonologue { get; private set; }
     PlayerInput playerInput;
     [SerializeField] GameObject panel;
+    [SerializeField] Image cutsceneImage;
     [SerializeField] float typingSpeed = 0.01f;
+    [SerializeField] string folderRoute = "Cutscenes";
 
     Coroutine typing;
     GameObject dialogue;
@@ -25,7 +27,9 @@ public class DialogueManager : MonoBehaviour
     CharacterInfo curCharacterAnimation;
     private InputAction nextLineAction;
     bool isFullText = false;
+    string cutsceneFolder = "";
 
+    #region unityFunctions
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -36,29 +40,14 @@ public class DialogueManager : MonoBehaviour
         nextLineAction.performed += OnNextPressed;
     }
 
-    public void OnNextPressed(InputAction.CallbackContext context)
-    {
-        if (!isInMonologue) return;
-        if (!isFullText)
-        {
-            StopCoroutine(typing);
-            message.text = "";
-            if (characterNameColored != "") message.text = characterNameColored + ":";
-            message.text += currentSentence;
-            isFullText = true;
-        }
-        else if (!story.canContinue) EndDialogue();
-        else if (curCharacterAnimation == null || !curCharacterAnimation.isInAnimation) AdvanceDialogue();
-    }
-
     void Start()
     {
         isInMonologue = false;
         message = panel.transform.GetComponentInChildren<Text>();
     }
+    #endregion
 
-
-
+    #region StartDialogue
     public void StartDialogue(GameObject dialogue)
     {
         isInMonologue = true;
@@ -75,10 +64,11 @@ public class DialogueManager : MonoBehaviour
 
     public bool LoadDocument()
     {
-        if (dialogue.GetComponent<DialogueTrigger>() != null)
-            inkFile = dialogue.GetComponent<DialogueTrigger>().inkFile;
-        else if (dialogue.GetComponent<ThoughtsTrigger>() != null)
-            inkFile = dialogue.GetComponent<ThoughtsTrigger>().inkFile;
+        if (dialogue.GetComponent<ITrigger>() != null)
+        {
+            inkFile = dialogue.GetComponent<ITrigger>().inkFile;
+            cutsceneFolder = dialogue.GetComponent<ITrigger>().cutsceneFolderName;
+        }
         else inkFile = null;
 
         if (inkFile == null) { EndDialogue(); Debug.Log("Somethnig went wrong"); return false; }
@@ -87,6 +77,24 @@ public class DialogueManager : MonoBehaviour
         characterInfos = dialogue.GetComponentsInChildren<CharacterInfo>();
         //Debug.Log(characterInfos[1].character + "    " + characterInfos.Length);
         return true;
+    }
+    #endregion
+
+    #region continueDialogue
+
+    public void OnNextPressed(InputAction.CallbackContext context)
+    {
+        if (!isInMonologue) return;
+        if (!isFullText)
+        {
+            StopCoroutine(typing);
+            message.text = "";
+            if (characterNameColored != "") message.text = characterNameColored + ":";
+            message.text += currentSentence;
+            isFullText = true;
+        }
+        else if (!story.canContinue) EndDialogue();
+        else if (curCharacterAnimation == null || !curCharacterAnimation.isInAnimation) AdvanceDialogue();
     }
 
     void AdvanceDialogue()
@@ -113,7 +121,9 @@ public class DialogueManager : MonoBehaviour
          //yield return new WaitForSeconds(4);
          //DiaplayNextSentence();
      }
+    #endregion
 
+    #region tags
     void ParseTags()
     {
         tags = story.currentTags;
@@ -139,6 +149,10 @@ public class DialogueManager : MonoBehaviour
                     Debug.Log("Color " + param);
                     SetTextColor(param);
                     break;
+                case "image":
+                    Debug.Log("Image " + param);
+                    SetNewCutsceneImage(param);
+                    break;
             }
         }
     }
@@ -163,6 +177,19 @@ public class DialogueManager : MonoBehaviour
         characterNameColored = string.Format("<color={0}>{1}</color>", param, characterName);
     }
 
+    void SetNewCutsceneImage(string param)
+    {
+        if (cutsceneFolder == null || cutsceneFolder == "") return;
+        Debug.Log("Change Image In Cutscene");
+        var sprite = Resources.Load<Sprite>(folderRoute + "/" + cutsceneFolder + "/" + param);
+        if (sprite == null) return;
+        cutsceneImage.sprite = sprite;
+        cutsceneImage.gameObject.SetActive(true);
+    }
+
+    #endregion
+
+    #region dialogueEnd
     void EndDialogue()
     {
         StopAllCoroutines();
@@ -180,5 +207,7 @@ public class DialogueManager : MonoBehaviour
         tags = null;
         isFullText = false;
         typing = null;
+        cutsceneImage.sprite = null;
     }
+    #endregion
 }

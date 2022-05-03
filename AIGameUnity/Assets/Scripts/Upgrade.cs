@@ -10,6 +10,7 @@ public class Upgrade : InteractableBase
         base.OnInteract();
 
         upgrade.SetActive(true);
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

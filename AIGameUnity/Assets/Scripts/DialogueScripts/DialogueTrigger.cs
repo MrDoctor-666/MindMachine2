@@ -3,21 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
 
-public class DialogueTrigger : InteractableBase
+public class DialogueTrigger : InteractableBase, ITrigger
 {
-    public TextAsset inkFile;
-    [SerializeField] bool isThisEndDialogue = false;
-    bool isThisStarted = false;
+    [SerializeField] private TextAsset inkFileSet;
+    [Header("If it's a cutscene, please specify: ")]
+    [SerializeField] private string cutsceneFolderNameSet;
+
+    public TextAsset inkFile { get => inkFileSet; set => inkFileSet = value; }
+    public string cutsceneFolderName { get => cutsceneFolderNameSet; set => cutsceneFolderNameSet = value; }
+
+    //[SerializeField] bool isThisEndDialogue = false;
+    // bool isThisStarted = false;
     private void Awake()
     {
-        if (isThisEndDialogue) EventAggregator.DialogueEnded.Subscribe(End);
+        //if (isThisEndDialogue) EventAggregator.DialogueEnded.Subscribe(End);
     }
 
     public override void OnInteract()
     {
         if (GameInfo.currentDevice.tag == "Bug")
         {
-            isThisStarted = true;
+            //isThisStarted = true;
             base.OnInteract();
             EventAggregator.DialogueStarted.Publish(gameObject);
             Debug.Log(gameObject);
@@ -26,7 +32,7 @@ public class DialogueTrigger : InteractableBase
             //Debug.Log("Can't interact from others"); //todo write on ui that we can't interact
     }
 
-    void End()
+    /*void End()
     {
         //TODO DELETE IT LATER
         if (isThisStarted)
@@ -34,5 +40,5 @@ public class DialogueTrigger : InteractableBase
             EventAggregator.endGame.Publish();
             isThisStarted = false;
         }
-    }
+    }*/
 }

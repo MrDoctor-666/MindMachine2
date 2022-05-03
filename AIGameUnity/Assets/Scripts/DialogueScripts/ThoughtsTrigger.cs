@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThoughtsTrigger : MonoBehaviour
+public class ThoughtsTrigger : MonoBehaviour, ITrigger
 {
-    public TextAsset inkFile;
+    [SerializeField] private TextAsset inkFileSet;
+    [Header("If it's a cutscene, please specify: ")]
+    [SerializeField] private string cutsceneFolderNameSet;
+
+    public TextAsset inkFile { get => inkFileSet; set => inkFileSet = value; }
+    public string cutsceneFolderName { get => cutsceneFolderNameSet; set => cutsceneFolderNameSet = value; }
 
     private bool isThisInProgress = false;
 
