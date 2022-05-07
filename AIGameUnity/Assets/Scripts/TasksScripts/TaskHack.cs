@@ -18,6 +18,7 @@ public class TaskHack : MonoBehaviour
             if (obj == dictionaryTaskInteract.objectToHack)
             {
                 EventAggregator.taskComplete.Publish(dictionaryTaskInteract.taskSo);
+                EventAggregator.deleteFromTaskBank.Publish(dictionaryTaskInteract.taskSo);
                 //todo надо ли удалять задания из списка?
             }
         }

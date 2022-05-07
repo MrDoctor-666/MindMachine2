@@ -68,6 +68,7 @@ public class EventAggregator
    
     //tasks
     public static EventOneParam<TaskSO> taskComplete = new EventOneParam<TaskSO>();
+    public static EventOneParam<TaskSO> deleteFromTaskBank = new EventOneParam<TaskSO>();
     public static EventOneParam<int> taskListAdd = new EventOneParam<int>();
     public static EventNoParam takenObject = new EventNoParam();
     public static EventOneParam<TaskSO> addTask = new EventOneParam<TaskSO>();

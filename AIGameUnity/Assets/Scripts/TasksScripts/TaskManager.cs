@@ -23,6 +23,8 @@ public class TaskManager : MonoBehaviour
     private void Awake()
     {
         EventAggregator.taskComplete.Subscribe(DeleteTask);
+        EventAggregator.deleteFromTaskBank.Subscribe(DeleteTaskFromBank);
+        EventAggregator.deleteFromTaskBank.Subscribe(DeleteTask);
         EventAggregator.newDayStarted.Subscribe(AddTaskForDay);
         EventAggregator.newDayStarted.Subscribe(DeleteOldTasks);
         EventAggregator.addTask.Subscribe(AddTask);
@@ -64,6 +66,10 @@ public class TaskManager : MonoBehaviour
         ChangeMissionWaypoint(taskList[0]);
         ShowText();
         //todo возможно надо делать сортировку после каждого удаление/добавление, но производительность...
+    }
+    public void DeleteTaskFromBank(TaskSO taskSo)
+    {
+        allTasksList.Remove(taskSo);
     }
 
     public void AddTask(TaskSO task)
