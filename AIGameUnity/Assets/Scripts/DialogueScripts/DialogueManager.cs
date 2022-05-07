@@ -44,6 +44,11 @@ public class DialogueManager : MonoBehaviour
     {
         isInMonologue = false;
         message = panel.transform.GetComponentInChildren<Text>();
+        if (cutsceneImage == null)
+        {
+            foreach (Image child in panel.GetComponentsInChildren<Image>(true))
+                if (child.gameObject.name == "CutscenePanel") cutsceneImage = child;
+        }
     }
     #endregion
 

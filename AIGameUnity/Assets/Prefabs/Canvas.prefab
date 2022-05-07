@@ -2233,7 +2233,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7709562951982381096
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4150,8 +4150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a2117bdd3012643bc2e2539d4aa163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deviceInfos: []
+  currentDeviceFont: {fileID: 12800000, guid: e5c0c44a563f844478ce699d9e53d01e, type: 3}
   currentColor: {r: 1, g: 0, b: 0, a: 1}
+  deviceInfos: []
 --- !u!114 &14086531634930914
 MonoBehaviour:
   m_ObjectHideFlags: 0
