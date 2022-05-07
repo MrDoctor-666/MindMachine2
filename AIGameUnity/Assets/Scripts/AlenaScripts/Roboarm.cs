@@ -214,11 +214,11 @@ public class Roboarm : MonoBehaviour
         int layerMask = 1 << 8;
         layerMask = ~layerMask;
         InteractableBase interact = InteractionData.interactionObj;
-         if (interact != null)
+         /*if (interact != null)
          {
              interact.OnInteract();
              if (interact.MultipleUse == false) interact.ChangeIfInteractable();
-         }
+         }*/
 
         if (gameObject.GetComponent<DeviceInfo>().isActive)
         {
