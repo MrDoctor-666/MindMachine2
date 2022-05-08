@@ -18,8 +18,8 @@ public class CameraRoboarm : MonoBehaviour
     private Camera cam;
     private bool moveUpDownCommand = false;
     private bool action = false;
-    private InputAction actionInputAction;
     private InputAction upDownInputAction;
+    private InputAction approachAction;
     private InputAction defCameraInputAction;
     private Vector3 posForCam;
     private Vector3 defaultposForCam;
@@ -32,11 +32,11 @@ public class CameraRoboarm : MonoBehaviour
     {
         cam = gameObject.GetComponent<Camera>();
         //upDownInputAction = playerInput.currentActionMap.FindAction("UpDown");
-        actionInputAction = playerInput.currentActionMap.FindAction("Action");
         defCameraInputAction = playerInput.currentActionMap.FindAction("DefCamera");
+        approachAction = playerInput.currentActionMap.FindAction("Approach");
 
         //upDownInputAction.performed += OnUpDown;
-        actionInputAction.performed += OnAction;
+        approachAction.performed += OnApproach;
         defCameraInputAction.performed += OnDefCamera;
         defaultposForCam = gameObject.transform.localPosition;
     }
@@ -88,13 +88,13 @@ public class CameraRoboarm : MonoBehaviour
         }
     }
 
-    private void OnAction(InputAction.CallbackContext context)
+    private void OnApproach(InputAction.CallbackContext context)
     {
         action = true;
-        Approach();
+        ApproachMoving();
     }
 
-    private void Approach()
+    private void ApproachMoving()
     {
         if (action)
         {

@@ -428,6 +428,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Approach",
+                    "type": "Button",
+                    "id": "26e0fb5b-d32e-407f-90b4-475180975d1a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -549,6 +558,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "DefCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a42b90c5-e9ee-452a-a9b9-26afe6b9e431",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Approach",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
