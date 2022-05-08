@@ -8,7 +8,7 @@ public class ColliderTask : MonoBehaviour
     [SerializeField] private TaskSO taskSo;
     [SerializeField] private string deviceTag;
     [SerializeField] private GameObject objectToDelivery;
-    [SerializeField] private bool isDeliveryTask;
+    [SerializeField] private bool isDeliveryTask, isAllDevices;
    // [SerializeField] private DeliveryMove deliveryMove;
     private Inventory inventory;
     
@@ -20,6 +20,11 @@ public class ColliderTask : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (isAllDevices)
+        {
+            EventAggregator.taskComplete.Publish(taskSo);   
+        }
+
         if (isDeliveryTask)
         {
             if (inventory.objectToSaveOnDelivery

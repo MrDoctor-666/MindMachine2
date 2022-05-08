@@ -28,11 +28,11 @@ public class TaskManager : MonoBehaviour
         EventAggregator.newDayStarted.Subscribe(AddTaskForDay);
         EventAggregator.newDayStarted.Subscribe(DeleteOldTasks);
         EventAggregator.addTask.Subscribe(AddTask);
-        AddTaskForDay(1);
     }
 
     private void Start()
     {
+        AddTaskForDay(1);
         SortList();
     }
 
@@ -96,9 +96,8 @@ public class TaskManager : MonoBehaviour
 
     public void ShowText()
     {
-        //todo масштабирование текста
         if (taskList.Count > 0)
-        {
+        { 
             showText.enabled = true;
             showText.text = taskList[0].taskInfo;
         }
