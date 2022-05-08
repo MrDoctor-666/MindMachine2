@@ -36,6 +36,7 @@ public class DeviceList : MonoBehaviour
             int x = i;
             if (deviceInfos.Count > i)
             {
+                buttons[x].GetComponent<Image>().sprite = activeSprite;
                 buttons[x].GetComponentInChildren<Text>().text = deviceInfos[x].nameToDisplay;
                 if (deviceInfos[x].isBlocked || !deviceInfos[i].gameObject.activeSelf) { 
                     buttons[x].interactable = false;
