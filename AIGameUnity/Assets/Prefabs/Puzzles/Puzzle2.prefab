@@ -4669,7 +4669,7 @@ GameObject:
   - component: {fileID: 2752588535841199394}
   m_Layer: 0
   m_Name: Door2
-  m_TagString: Untagged
+  m_TagString: Door2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
