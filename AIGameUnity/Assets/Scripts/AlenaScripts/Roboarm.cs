@@ -104,7 +104,7 @@ public class Roboarm : MonoBehaviour
 
     private void CurveDriving()
     {
-        if (deviceInfo.isActive)
+        if (deviceInfo.isActive && cam.GetComponent<CameraRoboarm>().beReady)
         {
             float duration = 1 / speed;
 

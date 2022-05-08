@@ -12,8 +12,8 @@ public class CameraRoboarm : MonoBehaviour
     [SerializeField] private int liftingHeight = 5;
     [SerializeField] private int startingHeight = 1;
     [SerializeField] private float maxInteractDistance = 100f;
-    [SerializeField] private bool under = true;
-    [SerializeField] private bool moveTowards = false;
+    private bool under = true;
+    private bool moveTowards = false;
     
     private Camera cam;
     private bool moveUpDownCommand = false;
@@ -25,7 +25,7 @@ public class CameraRoboarm : MonoBehaviour
     private Vector3 defaultposForCam;
     private InteractableBase interact;
     private GameObject moveTo;
-    public bool beReady = true;
+    [HideInInspector] public bool beReady = true;
 
 
     private void Awake()
