@@ -12,5 +12,5 @@ public class TaskSO : ScriptableObject
     [SerializeField] public int priority = 100;
 
     //todo маркер задания?
-    [SerializeField] string diaryInfo = "Info in diary after complete task";
+    [SerializeField] public string diaryInfo = "Info in diary after complete task";
 }

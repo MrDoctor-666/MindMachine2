@@ -11,7 +11,7 @@ using TMPro;
 public class TaskManager : MonoBehaviour
 {
     [SerializeField] public List<TaskSO> taskList = new List<TaskSO>();
-    [SerializeField] List<TaskSO> allTasksList = new List<TaskSO>();
+    [SerializeField] public List<TaskSO> allTasksList = new List<TaskSO>();
 
     private MyCompare<TaskSO> myCompare = new MyCompare<TaskSO>();
 
