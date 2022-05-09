@@ -7,6 +7,7 @@ public enum Characters
     Captain,
     FirstMate,
     Translator,
+    Wife,
     Unknown
 }
 
@@ -26,7 +27,8 @@ public static class GameInfo
     {
         { "капитан", Characters.Captain},
         { "первый помощник", Characters.FirstMate},
-        { "переводчик", Characters.Translator }
+        { "переводчик", Characters.Translator },
+        { "???", Characters.Wife }
     };
  
 
