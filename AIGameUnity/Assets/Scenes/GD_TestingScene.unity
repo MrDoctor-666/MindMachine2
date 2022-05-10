@@ -148,6 +148,8 @@ MonoBehaviour:
   cameraApproach: 0
   tooltipMessage: Interact
   roboarm: {fileID: 1576930414}
+  sprite1: {fileID: 0}
+  sprite2: {fileID: 0}
 --- !u!65 &1136506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3548,6 +3550,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 614522517818267810, guid: c52d7fc0ca738554f8a7bf217396b320, type: 3}
   m_PrefabInstance: {fileID: 129745385}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &130467083
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 130467084}
+  m_Layer: 9
+  m_Name: Cutscenes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &130467084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130467083}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 456209760}
+  - {fileID: 2078249514}
+  m_Father: {fileID: 961000426}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &130767185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3932,7 +3966,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4df620470017a45a2683bff1241775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkFile: {fileID: 4900000, guid: 314bbff688d69834baca763d110c495a, type: 3}
+  inkFileSet: {fileID: 0}
+  cutsceneFolderNameSet: 
 --- !u!65 &137891460
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7489,7 +7524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4df620470017a45a2683bff1241775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkFile: {fileID: 4900000, guid: 44c6d9215b34c704b8d77b954a57e08f, type: 3}
+  inkFileSet: {fileID: 0}
+  cutsceneFolderNameSet: 
 --- !u!65 &213561127
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9476,7 +9512,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4df620470017a45a2683bff1241775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkFile: {fileID: 4900000, guid: a0b685f9663e25e48861f26b421cb877, type: 3}
+  inkFileSet: {fileID: 0}
+  cutsceneFolderNameSet: 
 --- !u!65 &267828072
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10679,6 +10716,8 @@ MonoBehaviour:
   cameraApproach: 0
   tooltipMessage: Interact
   roboarm: {fileID: 1576930414}
+  sprite1: {fileID: 0}
+  sprite2: {fileID: 0}
 --- !u!136 &293868472
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -14219,7 +14258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4df620470017a45a2683bff1241775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkFile: {fileID: 4900000, guid: e2aa8e9ec9f399946bf2888ebdd4f388, type: 3}
+  inkFileSet: {fileID: 0}
+  cutsceneFolderNameSet: 
 --- !u!65 &390851936
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16371,7 +16411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &456209760
 Transform:
   m_ObjectHideFlags: 0
@@ -16383,7 +16423,7 @@ Transform:
   m_LocalPosition: {x: 2.36, y: -1.29, z: 3.87}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
-  m_Father: {fileID: 1541170581}
+  m_Father: {fileID: 130467084}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &456209761
@@ -16398,7 +16438,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4df620470017a45a2683bff1241775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkFile: {fileID: 4900000, guid: 4554840ac5871de47a912a4ea7930a5b, type: 3}
+  inkFileSet: {fileID: 4900000, guid: d9586d64878b30f46bacbfd92e80a286, type: 3}
+  cutsceneFolderNameSet: 1
 --- !u!65 &456209762
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19688,7 +19729,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4df620470017a45a2683bff1241775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkFile: {fileID: 4900000, guid: ca812917e61463f48b327e7127d2c588, type: 3}
+  inkFileSet: {fileID: 0}
+  cutsceneFolderNameSet: 
 --- !u!65 &531462578
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19767,6 +19809,7 @@ MonoBehaviour:
   deviceTag: Roboarm
   objectToDelivery: {fileID: 0}
   isDeliveryTask: 0
+  isAllDevices: 0
 --- !u!1 &532511997
 GameObject:
   m_ObjectHideFlags: 0
@@ -20722,6 +20765,7 @@ MonoBehaviour:
   deviceTag: Bug
   objectToDelivery: {fileID: 0}
   isDeliveryTask: 0
+  isAllDevices: 0
 --- !u!1 &558716534
 GameObject:
   m_ObjectHideFlags: 0
@@ -24966,6 +25010,7 @@ MonoBehaviour:
   deviceTag: Bug
   objectToDelivery: {fileID: 0}
   isDeliveryTask: 0
+  isAllDevices: 0
 --- !u!1 &679118386
 GameObject:
   m_ObjectHideFlags: 0
@@ -27124,6 +27169,8 @@ MonoBehaviour:
   cameraApproach: 0
   tooltipMessage: Interact
   roboarm: {fileID: 1576930414}
+  sprite1: {fileID: 0}
+  sprite2: {fileID: 0}
 --- !u!65 &727273897
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28188,7 +28235,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4df620470017a45a2683bff1241775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkFile: {fileID: 4900000, guid: 469b7f3274542ac4a9aab52ad17ea8ef, type: 3}
+  inkFileSet: {fileID: 0}
+  cutsceneFolderNameSet: 
 --- !u!1001 &780684595
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31283,7 +31331,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4df620470017a45a2683bff1241775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkFile: {fileID: 4900000, guid: 842bd97bcce6a744ba870efb47732235, type: 3}
+  inkFileSet: {fileID: 0}
+  cutsceneFolderNameSet: 
 --- !u!65 &878558100
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33164,6 +33213,7 @@ Transform:
   m_Children:
   - {fileID: 1541170581}
   - {fileID: 362109350}
+  - {fileID: 130467084}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -36008,10 +36058,7 @@ MonoBehaviour:
   taskManager: {fileID: 1012894120}
   inventory: {fileID: 1012894122}
   roboArmScript: {fileID: 1576930414}
-  tosterThoughts:
-  - {fileID: 456209759}
-  - {fileID: 137891457}
-  - {fileID: 1296039257}
+  tosterThoughtsGO: []
   dialogues: []
 --- !u!114 &1012894120 stripped
 MonoBehaviour:
@@ -39160,6 +39207,8 @@ MonoBehaviour:
   cameraApproach: 0
   tooltipMessage: Interact
   roboarm: {fileID: 1576930414}
+  sprite1: {fileID: 0}
+  sprite2: {fileID: 0}
 --- !u!136 &1066570958
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -42754,8 +42803,8 @@ MonoBehaviour:
   canBePutOn: 0
   cameraApproach: 0
   tooltipMessage: Listen
-  inkFile: {fileID: 4900000, guid: a8a459c994a4e374bae0cbf2579a6183, type: 3}
-  isThisEndDialogue: 1
+  inkFileSet: {fileID: 0}
+  cutsceneFolderNameSet: 
 --- !u!65 &1149026971
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -44804,8 +44853,8 @@ MonoBehaviour:
   canBePutOn: 0
   cameraApproach: 0
   tooltipMessage: Listen
-  inkFile: {fileID: 4900000, guid: a8a459c994a4e374bae0cbf2579a6183, type: 3}
-  isThisEndDialogue: 1
+  inkFileSet: {fileID: 0}
+  cutsceneFolderNameSet: 
 --- !u!65 &1196954465
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -47823,7 +47872,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4df620470017a45a2683bff1241775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkFile: {fileID: 4900000, guid: 7250de352d8a7854bb0afed44b128e2c, type: 3}
+  inkFileSet: {fileID: 0}
+  cutsceneFolderNameSet: 
 --- !u!65 &1296039260
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51483,7 +51533,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4df620470017a45a2683bff1241775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkFile: {fileID: 4900000, guid: 054d362d00d271747a0192badb48273a, type: 3}
+  inkFileSet: {fileID: 0}
+  cutsceneFolderNameSet: 
 --- !u!65 &1411650004
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52012,6 +52063,7 @@ MonoBehaviour:
   deviceTag: DeliveryBot
   objectToDelivery: {fileID: 1446749624}
   isDeliveryTask: 1
+  isAllDevices: 0
 --- !u!65 &1420911561
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52207,7 +52259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4df620470017a45a2683bff1241775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkFile: {fileID: 4900000, guid: 0e8938569d1fb37409a03542e2e320b8, type: 3}
+  inkFileSet: {fileID: 0}
+  cutsceneFolderNameSet: 
 --- !u!65 &1421101583
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -57028,8 +57081,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 456209760}
+  m_Children: []
   m_Father: {fileID: 961000426}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -57926,6 +57978,7 @@ MonoBehaviour:
   deviceTag: Bug
   objectToDelivery: {fileID: 0}
   isDeliveryTask: 0
+  isAllDevices: 0
 --- !u!1001 &1567395724
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58747,7 +58800,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4df620470017a45a2683bff1241775, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkFile: {fileID: 4900000, guid: d4311c07e863880489505703b5e788b3, type: 3}
+  inkFileSet: {fileID: 0}
+  cutsceneFolderNameSet: 
 --- !u!65 &1588381363
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -76923,6 +76977,116 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 80575be3857ab69499c80783838503e1, type: 3}
   m_PrefabInstance: {fileID: 2077059238}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2078249513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2078249514}
+  - component: {fileID: 2078249518}
+  - component: {fileID: 2078249517}
+  - component: {fileID: 2078249516}
+  - component: {fileID: 2078249515}
+  m_Layer: 9
+  m_Name: Cutscene2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2078249514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078249513}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.36, y: -1.29, z: 3.87}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_Children: []
+  m_Father: {fileID: 130467084}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2078249515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078249513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4df620470017a45a2683bff1241775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inkFileSet: {fileID: 4900000, guid: 2d53670a0201ddc49a486a88d25eb6ab, type: 3}
+  cutsceneFolderNameSet: 2
+--- !u!65 &2078249516
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078249513}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &2078249517
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078249513}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 50980ab6343cde24fac4c198ed427d02, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &2078249518
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078249513}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &2078905404
 GameObject:
   m_ObjectHideFlags: 0
