@@ -31,11 +31,11 @@ public class CameraRoboarm : MonoBehaviour
     private void Awake()
     {
         cam = gameObject.GetComponent<Camera>();
-        //upDownInputAction = playerInput.currentActionMap.FindAction("UpDown");
+        upDownInputAction = playerInput.currentActionMap.FindAction("UpDown");
         defCameraInputAction = playerInput.currentActionMap.FindAction("DefCamera");
         approachAction = playerInput.currentActionMap.FindAction("Approach");
 
-        //upDownInputAction.performed += OnUpDown;
+        upDownInputAction.performed += OnUpDown;
         approachAction.performed += OnApproach;
         defCameraInputAction.performed += OnDefCamera;
         defaultposForCam = gameObject.transform.localPosition;
@@ -45,7 +45,7 @@ public class CameraRoboarm : MonoBehaviour
     {
         if (roboarm.isActive)
         {
-            //MovingUpDown();
+            MovingUpDown();
             MovingToObject();
         }
         OnDefCamera();
