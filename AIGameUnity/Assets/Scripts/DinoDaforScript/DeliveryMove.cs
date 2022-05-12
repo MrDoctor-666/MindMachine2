@@ -30,6 +30,7 @@ public class DeliveryMove : MonoBehaviour
     [SerializeField] float backToNormalSpeed = 0.5f;
     float time = 0.0f;
     Quaternion endRotation, initialRotation;
+    IEnumerator curCoroutine = null;
 
 
     private void Awake()
@@ -150,7 +151,21 @@ public class DeliveryMove : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Slope")
+        {
             gameObject.GetComponent<Rigidbody>().freezeRotation = false;
+            if (curCoroutine != null) StopCoroutine(curCoroutine);
+            curCoroutine = null;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Slope" && gameObject.GetComponent<Rigidbody>().freezeRotation == true)
+        {
+            gameObject.GetComponent<Rigidbody>().freezeRotation = false;
+            if (curCoroutine != null) StopCoroutine(curCoroutine);
+            curCoroutine = null;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -159,7 +174,9 @@ public class DeliveryMove : MonoBehaviour
         {
             gameObject.GetComponent<Rigidbody>().freezeRotation = true;
             //transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
-            StartCoroutine(rotateSlowly());
+            if (curCoroutine != null) StopCoroutine(curCoroutine);
+            curCoroutine = rotateSlowly();
+            StartCoroutine(curCoroutine);
         }
     }
 
