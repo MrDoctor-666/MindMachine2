@@ -151,7 +151,7 @@ public class Roboarm : MonoBehaviour
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        if (deviceInfo.isActive)
+        if (deviceInfo.isActive && cam.GetComponent<CameraRoboarm>().beReady)
         {
             moveCommand = context.action.ReadValue<Vector2>();
             if (moveCommand != Vector2.zero)

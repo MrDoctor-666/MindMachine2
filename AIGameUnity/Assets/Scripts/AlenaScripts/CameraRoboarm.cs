@@ -12,8 +12,10 @@ public class CameraRoboarm : MonoBehaviour
     [SerializeField] private int liftingHeight = 5;
     [SerializeField] private int startingHeight = 1;
     [SerializeField] private float maxInteractDistance = 100f;
+    [SerializeField] private bool canUpDown;
     private bool under = true;
     private bool moveTowards = false;
+   
     
     private Camera cam;
     private bool moveUpDownCommand = false;
@@ -35,10 +37,10 @@ public class CameraRoboarm : MonoBehaviour
         defCameraInputAction = playerInput.currentActionMap.FindAction("DefCamera");
         approachAction = playerInput.currentActionMap.FindAction("Approach");
 
-        upDownInputAction.performed += OnUpDown;
         approachAction.performed += OnApproach;
         defCameraInputAction.performed += OnDefCamera;
         defaultposForCam = gameObject.transform.localPosition;
+        if (canUpDown) upDownInputAction.performed += OnUpDown;
     }
 
     void Update()
