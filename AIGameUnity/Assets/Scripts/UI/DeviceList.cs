@@ -92,10 +92,10 @@ public class DeviceList : MonoBehaviour
         foreach (Button button in buttons)
             if (button.GetComponentInChildren<Text>().text == device.GetComponent<DeviceInfo>().nameToDisplay)
             {
-                button.GetComponent<Image>().color = currentColor;
                 currentActive.GetComponent<Image>().color = Color.white;
-                button.GetComponentInChildren<Text>().font = currentDeviceFont;
+                button.GetComponent<Image>().color = currentColor;
                 currentActive.GetComponentInChildren<Text>().font = defaultFont;
+                button.GetComponentInChildren<Text>().font = currentDeviceFont;
                 currentActive = button;
             }
     }
