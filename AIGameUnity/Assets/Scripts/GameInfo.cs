@@ -26,9 +26,11 @@ public static class GameInfo
     public static Dictionary<string, Characters> people = new Dictionary<string, Characters>()
     {
         { "капитан", Characters.Captain},
+        { "космо плав", Characters.Captain},
         { "первый помощник", Characters.FirstMate},
         { "переводчик", Characters.Translator },
-        { "???", Characters.Wife }
+        { "разно буквец", Characters.Translator },
+        { "свет очей", Characters.Wife }
     };
  
 
