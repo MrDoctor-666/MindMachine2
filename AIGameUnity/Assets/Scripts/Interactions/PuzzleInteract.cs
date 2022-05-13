@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuzzleInteract : InteractableBase, IPuzzled, ITrigger
+public class PuzzleInteract : InteractableBase, IPuzzled
 {
     [Header("Puzzle Settings")]
     [SerializeField] private float prizeSabotge;
@@ -11,16 +11,12 @@ public class PuzzleInteract : InteractableBase, IPuzzled, ITrigger
     [SerializeField] private float minusSuspitionAlgorithm;
 
     [Header("IF YOU NEED CUTSCENE AFTER")]
-    [SerializeField] private TextAsset inkFileSet;
-    [Header("If it's a cutscene, please specify: ")]
-    [SerializeField] private string cutsceneFolderNameSet;
+    [SerializeField] GameObject algorithmEnd;
+    [SerializeField] GameObject sabotageEnd;
 
     float IPuzzled.prizeSabotge { get => prizeSabotge; set => prizeSabotge = value; }
     float IPuzzled.suspicionSabotage { get => suspicionSabotage; set => suspicionSabotage = value; }
     float IPuzzled.minusSuspitionAlgorithm { get => minusSuspitionAlgorithm; set => minusSuspitionAlgorithm = value; }
-
-    public TextAsset inkFile { get => inkFileSet; set => inkFileSet = value; }
-    public string cutsceneFolderName { get => cutsceneFolderNameSet; set => cutsceneFolderNameSet = value; }
 
     bool isStarted = false;
 
@@ -31,10 +27,11 @@ public class PuzzleInteract : InteractableBase, IPuzzled, ITrigger
 
     private void OnPuzzleEnd(PuzzleEnd obj)
     {
-        if (isStarted && inkFile != null)
+        Debug.Log(isStarted);
+        if (isStarted)
         {
-            EventAggregator.DialogueStarted.Publish(gameObject);
             isStarted = false;
+            StartCoroutine(wait(obj));
         }
     }
 
@@ -43,5 +40,14 @@ public class PuzzleInteract : InteractableBase, IPuzzled, ITrigger
         base.OnInteract();
         isStarted = true;
         EventAggregator.puzzleStarted.Publish(gameObject);
+    }
+
+    IEnumerator wait(PuzzleEnd puzzleEnd)
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (puzzleEnd == PuzzleEnd.Algorithm && algorithmEnd != null)
+            EventAggregator.DialogueStarted.Publish(algorithmEnd);
+        else if (puzzleEnd == PuzzleEnd.Sabotage && sabotageEnd != null)
+            EventAggregator.DialogueStarted.Publish(sabotageEnd);
     }
 }
