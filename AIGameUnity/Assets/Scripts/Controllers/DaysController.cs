@@ -33,7 +33,7 @@ public class DaysController : MonoBehaviour
 
     public void NextDay()
     {
-        if (currentDay >= endDay) return; //throw error or something
+        if (currentDay >= endDay) { EventAggregator.endGame.Publish(Endings.TosterEnding); return; } //throw error or something
         currentDay++;
         EventAggregator.newDayStarted.Publish(currentDay);
         ObjectStateChange();

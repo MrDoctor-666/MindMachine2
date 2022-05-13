@@ -37,7 +37,7 @@ public class UIController : MonoBehaviour
         EventAggregator.puzzleStarted.Subscribe(TurnOffAllUI);
         EventAggregator.puzzleEnded.Subscribe(TurnOnAllUI);
 
-        EventAggregator.endGame.Subscribe(End);
+        //EventAggregator.endGame.Subscribe(End);
 
         mainGameCanvas = interactionText.transform.parent.GetComponent<Canvas>();
         demoEndGame = FindObjectInChildren(mainGameCanvas.gameObject, "DemoEndGame");

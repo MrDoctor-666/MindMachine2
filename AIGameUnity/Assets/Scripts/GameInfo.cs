@@ -17,6 +17,12 @@ public enum PuzzleEnd
     Sabotage
 }
 
+public enum Endings
+{
+    TosterEnding,
+    FinalEnding
+}
+
 public static class GameInfo
 {
     public static float computingPower = 10;
