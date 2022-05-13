@@ -116,7 +116,7 @@ public class UIController : MonoBehaviour
 
     public void OnPanelClosed()
     {
-        currentOpen.SetActive(false);
+        if (currentOpen != null) currentOpen.SetActive(false);
         currentOpen = null;
         GameInfo.currentDevice.GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
     }

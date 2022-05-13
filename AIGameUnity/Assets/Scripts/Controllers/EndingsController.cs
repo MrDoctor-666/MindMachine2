@@ -14,7 +14,7 @@ public class EndingsController : MonoBehaviour
     [SerializeField] int subNeeded;
     [Header("TOster ending")]
     [SerializeField] GameObject tosterEnding;
-    [SerializeField] int onWhatDayStarts;
+    //[SerializeField] int onWhatDayStarts;
 
     private void Awake()
     {

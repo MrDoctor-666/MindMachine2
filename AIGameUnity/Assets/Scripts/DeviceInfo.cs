@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeviceInfo : MonoBehaviour
+public class DeviceInfo : MonoBehaviour, IPuzzled
 {
     public string nameToDisplay;
     public bool isActive = false;
@@ -10,13 +10,15 @@ public class DeviceInfo : MonoBehaviour
     public float cost;
     [Header("Computing Power")]
     //public float prizeAlgorithm;
-    public float prizeSabotge;
+    [SerializeField] private float prizeSabotge;
     public float everyDayPrize;
     [Header("Suspition")]
-    public float suspicionSabotage;
-    public float minusSuspitionAlgorithm;
+    [SerializeField] private float suspicionSabotage;
+    [SerializeField] private float minusSuspitionAlgorithm;
 
-    //public GameObject puzzle;
+    float IPuzzled.prizeSabotge { get => prizeSabotge; set => prizeSabotge = value; }
+    float IPuzzled.suspicionSabotage { get => suspicionSabotage; set => suspicionSabotage = value; }
+    float IPuzzled.minusSuspitionAlgorithm { get => minusSuspitionAlgorithm; set => minusSuspitionAlgorithm = value; }
 
     //maybe we can make this an abstract class
     //and inherit it to CockroachInfo or something
