@@ -56,8 +56,8 @@ public class DeviceInteraction : MonoBehaviour
     
     public void CheckForInteractionWithRayCast(float interactDist, int layerNum1, int layerNum2)
     {
-        int layerMask1 = 1 << layerNum1;
         int layerMask2 = 1 << layerNum2;
+        int layerMask1 = 1 << layerNum1;
         layerMask1 = layerMask1 | layerMask2;
         layerMask1 = ~layerMask1;
         Camera cam = GetComponentInChildren<Camera>();
