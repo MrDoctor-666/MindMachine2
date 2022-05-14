@@ -9,7 +9,7 @@ public class InventoryController : MonoBehaviour
     private InteractableBase interact;
     private DeviceInfo deviceInfo;
     private Inventory inventory;
-
+    private Vector3 sizeOfObject;
     private void Awake()
     {
         roboArmScript = gameObject.GetComponent<Roboarm>();
@@ -26,8 +26,6 @@ public class InventoryController : MonoBehaviour
             int layerMask2 = 1 << 9;
             layerMask1 = layerMask1 | layerMask2;
             layerMask1 = ~layerMask1;
-          //  Debug.Log(roboArmScript.id + "?");
-        //    Debug.Log("Object: " + inventory.dictionary[roboArmScript.id]);
             Ray ray = gameObject.GetComponentInChildren<Camera>()
                 .ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
 
@@ -41,26 +39,12 @@ public class InventoryController : MonoBehaviour
                     return;
                 }
 
-                //проверка дистанции
-                /*if (roboArmScript.maxInteractDistance < hit.distance)
-                {
-                    //todo Ссылка на канвас, а не на ребенка UPD
-                    //todo Сделать коррутину для показа текста/сделать такою же логику, как и для взаимодействия с UI элементами, тех.документацию бы дописать, мда
-                    //  obj.GetComponentInChildren<Text>().enabled = true;
-                    // Debug.Log(hit.distance);
-                    return;
-                }
-                else
-                {
-                    //  obj.GetComponentInChildren<Text>().enabled = false;
-                    //  Debug.Log(hit.distance);
-                }*/
-
                 if (inventory.dictionary[roboArmScript.id] == null &&
                     !hit.collider.gameObject.CompareTag("DeliveryBot") &&
                     interact.IsPortable)
                 {
                     inventory.dictionary[roboArmScript.id] = hit.collider.gameObject;
+                    sizeOfObject = hit.collider.bounds.size;
                     inventory.dictionary[roboArmScript.id].SetActive(false);
                     EventAggregator.takenObject.Publish();
                     //публикация взятия объекта для задания
@@ -99,9 +83,18 @@ public class InventoryController : MonoBehaviour
                          !hit.collider.gameObject.CompareTag("DeliveryBot") &&
                          interact.CanBePutOn)
                 {
-                    //todo тест места для спавна
+                
+                    RaycastHit hitCheck;
+                    Vector3 origin = hit.collider.bounds.center + new Vector3(0,hit.collider.bounds.extents.y/2,0); 
+                    Ray ray1 = new Ray(origin, Vector3.up);
+                    //todo не получается получить BoxCollider у NonActive Object
+                    //maxDist = hit.collider.bounds.size.y
+                        if (Physics.Raycast(ray1, out hitCheck, sizeOfObject.y))
+                        {
+                            return;
+                        }
                     inventory.dictionary[roboArmScript.id].SetActive(true);
-                    inventory.dictionary[roboArmScript.id].transform.position = hit.point;
+                    inventory.dictionary[roboArmScript.id].transform.position = hit.collider.bounds.center + new Vector3(0,inventory.dictionary[roboArmScript.id].gameObject.GetComponent<BoxCollider>().bounds.extents.y,0 );
                     inventory.dictionary[roboArmScript.id] = null;
                     EventAggregator.putObjectEvent.Publish();
                     Debug.Log("Кладём вещь на сцену");
