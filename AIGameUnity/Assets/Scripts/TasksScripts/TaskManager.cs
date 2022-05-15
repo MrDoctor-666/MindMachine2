@@ -15,7 +15,6 @@ public class TaskManager : MonoBehaviour
 
     private MyCompare<TaskSO> myCompare = new MyCompare<TaskSO>();
 
-    //[SerializeField] private GameObject questPanel;
     [SerializeField] private TextMeshProUGUI showText;
 
 
@@ -54,6 +53,7 @@ public class TaskManager : MonoBehaviour
                 allTasksList.Remove(task);
             }
         }
+        ChangeMissionWaypoint(taskList[0]);
 
         ShowText();
     }

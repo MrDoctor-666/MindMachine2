@@ -11,8 +11,8 @@ public class DaysController : MonoBehaviour
     [SerializeField] float suspitionDecrease;
 
     List<TempObjects> tempObjects;
-
-    [SerializeField] private SaveManager saveManager;
+    
+    private SaveManager saveManager;
 
     private void Awake()
     {
@@ -29,6 +29,7 @@ public class DaysController : MonoBehaviour
         }
 
         EventAggregator.changeDay.Subscribe(NextDay);
+        saveManager = GetComponent<SaveManager>();
     }
 
     public void NextDay()
