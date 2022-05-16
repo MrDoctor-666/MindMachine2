@@ -25,6 +25,7 @@ public class PuzzleController : MonoBehaviour
     {
         curDevice = device;
         //start puzzle
+        Debug.Log("Start puzzle" + curPuzzleLevel);
         puzzleCamera.gameObject.GetComponent<AudioListener>().enabled = true;
 
         if (curPuzzleLevel >= puzzleLevels.Count) curPuzzleLevel = puzzleLevels.Count - 1;
@@ -32,6 +33,7 @@ public class PuzzleController : MonoBehaviour
         
         curPuzzleLevel++;
         puz.transform.position = puzzleCamera.transform.position + new Vector3(0, 0, 10);
+        puz.gameObject.SetActive(true);
         puzzleCamera.GetComponent<SnakeManagerNew>().Start();
         //Camera curCamera = device.GetComponentInChildren<Camera>();
         //curCamera.enabled = false;
