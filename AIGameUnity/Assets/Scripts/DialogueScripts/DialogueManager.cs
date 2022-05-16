@@ -55,6 +55,7 @@ public class DialogueManager : MonoBehaviour
     #region StartDialogue
     public void StartDialogue(GameObject dialogue)
     {
+        Reset();
         isInMonologue = true;
         this.dialogue = dialogue;
         Debug.Log("Starting Conversation");
@@ -213,6 +214,7 @@ public class DialogueManager : MonoBehaviour
         isFullText = false;
         typing = null;
         cutsceneImage.sprite = null;
+        cutsceneImage.gameObject.SetActive(false);
     }
     #endregion
 }
