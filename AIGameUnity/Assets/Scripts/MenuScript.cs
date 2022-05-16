@@ -5,21 +5,15 @@ using UnityEngine;
 
 public class MenuScript: MonoBehaviour
 {
-    [SerializeField] private DaysController dc;
+    [SerializeField] private SaveManager sm;
 
-    public void NewDay()
+    public void ReloadDay()
     {
-        dc.NextDay();
+        if (sm)
+            sm.Load();
     }
 
-    public void QuitToMenu()
-    {
-        SceneManager.LoadScene("MainMenuScene");
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-        Application.Quit();
-    }
+    public void QuitToMenu() => SceneManager.LoadScene("MainMenuScene");
+    
+    public void QuitGame() => Application.Quit();
 }
