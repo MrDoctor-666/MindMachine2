@@ -17,5 +17,5 @@ MonoBehaviour:
     \u0441\u0442\u0435\u043D\u044B"
   firstAvailableDay: 4
   lastAvailableDay: 4
-  priority: 4
+  priority: 5
   diaryInfo: Info in diary after complete task

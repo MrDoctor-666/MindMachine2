@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskInfo: "\u041D\u0430\u0439\u0434\u0438\u0442\u0435 \u043A\u043B\u044E\u0447-\u043A\u0430\u0440\u0442\u0443
     \u0432 \u043C\u0430\u0448\u0438\u043D\u043D\u043E\u043C \u043E\u0442\u0434\u0435\u043B\u0435\u043D\u0438\u0438"
-  firstAvailableDay: 4
-  lastAvailableDay: 4
-  priority: 4
+  firstAvailableDay: 5
+  lastAvailableDay: 5
+  priority: 2
   diaryInfo: Info in diary after complete task
