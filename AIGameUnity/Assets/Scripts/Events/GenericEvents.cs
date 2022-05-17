@@ -3,7 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventOneParam<T>
+interface AnyEvent
+{
+    public void Clear();
+}
+public class EventOneParam<T> : AnyEvent
 {
     private readonly List<Action<T>> _callbacks = new List<Action<T>>();
 
@@ -17,8 +21,13 @@ public class EventOneParam<T>
         foreach (Action<T> callback in _callbacks)
             callback(obj);
     }
+
+    public void Clear()
+    {
+        _callbacks.Clear();
+    }
 }
-public class EventTwoParam<T, V>
+public class EventTwoParam<T, V> : AnyEvent
 {
     private readonly List<Action<T, V>> _callbacks = new List<Action<T, V>>();
 
@@ -32,9 +41,14 @@ public class EventTwoParam<T, V>
         foreach (Action<T, V> callback in _callbacks)
             callback(obj, obj2);
     }
+
+    public void Clear()
+    {
+        _callbacks.Clear();
+    }
 }
 
-public class EventNoParam
+public class EventNoParam : AnyEvent
 {
     private readonly List<Action> _callbacks = new List<Action>();
 
@@ -47,5 +61,10 @@ public class EventNoParam
     {
         foreach (Action callback in _callbacks)
             callback();
+    }
+
+    public void Clear()
+    {
+        _callbacks.Clear();
     }
 }

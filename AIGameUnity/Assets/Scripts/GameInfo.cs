@@ -57,4 +57,12 @@ public static class GameInfo
     {
         suspicion += amount;
     }
+
+    public static void Reset()
+    {
+        computingPower = 10;
+        suspicion = 10;
+        currentDevice = null;
+        devices = null;
+    }
 }

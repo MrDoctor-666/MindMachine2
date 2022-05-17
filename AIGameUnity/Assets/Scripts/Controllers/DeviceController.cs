@@ -12,6 +12,7 @@ public class DeviceController : MonoBehaviour
     private void Awake()
     {
         GameInfo.currentDevice = currentDevice;
+        Debug.Log("AWAKE" + currentDevice); 
 
         EventAggregator.DeviceSwitched.Subscribe(OnDeviceSwitch);
 
@@ -46,6 +47,7 @@ public class DeviceController : MonoBehaviour
 
     public void OnDeviceSwitch(GameObject device)
     {
+        Debug.Log("On device switch to " + device);
         Cursor.lockState = CursorLockMode.None;
         InteractionData.Reset();
         EventAggregator.IntercationAreaExited.Publish(currentDevice);
@@ -65,8 +67,12 @@ public class DeviceController : MonoBehaviour
 
     public void OnStopWorking(GameObject gameObject)
     {
-        currentDevice.GetComponent<DeviceInfo>().isActive = false;
-        EventAggregator.endMoving.Publish(currentDevice);
+        Debug.Log("current device   " + currentDevice);
+        Debug.Log("current device in gameinfo" + GameInfo.currentDevice);
+        //currentDevice.GetComponent<DeviceInfo>().isActive = false;
+        GameInfo.currentDevice.GetComponent<DeviceInfo>().isActive = false;
+        EventAggregator.endMoving.Publish(GameInfo.currentDevice);
+        //EventAggregator.endMoving.Publish(currentDevice);
         Cursor.lockState = CursorLockMode.None;
     }
 

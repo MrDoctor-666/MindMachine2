@@ -1,5 +1,4 @@
- using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class EventAggregator
@@ -76,4 +75,20 @@ public class EventAggregator
 
     //endGame
     public static EventOneParam<Endings> endGame = new EventOneParam<Endings>();
+
+    public static void Reset()
+    {
+        Debug.Log("RESET EVENT AGGREGATOR");
+        Type type = typeof(EventAggregator);
+        foreach(var p in type.GetFields(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public))
+        {
+            if (p.GetValue(null).GetType() == typeof(EventNoParam))
+                (p.GetValue(null) as EventNoParam).Clear();
+            else if (p.GetValue(null).GetType().IsGenericType)
+            {
+                Type[] types = p.GetValue(null).GetType().GetGenericArguments();
+                (p.GetValue(null) as AnyEvent).Clear();
+            }
+        }
+    }
 }

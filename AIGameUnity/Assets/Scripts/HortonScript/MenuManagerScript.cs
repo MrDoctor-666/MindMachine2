@@ -25,6 +25,8 @@ public class MenuManagerScript : MonoBehaviour
 
     public void GoToMainMenuScene()
     {
+        EventAggregator.Reset();
+        GameInfo.Reset();
         SceneManager.LoadScene("MainMenuScene");   
     }
 }

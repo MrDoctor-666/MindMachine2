@@ -13,7 +13,12 @@ public class MenuScript: MonoBehaviour
             sm.Load();
     }
 
-    public void QuitToMenu() => SceneManager.LoadScene("MainMenuScene");
+    public void QuitToMenu()
+    {
+        EventAggregator.Reset();
+        GameInfo.Reset();
+        SceneManager.LoadScene("MainMenuScene");
+    }
     
     public void QuitGame() => Application.Quit();
 }
