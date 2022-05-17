@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d155e993eea544483475db92c1bce2, type: 3}
   m_Name: 11ColliderTask
   m_EditorClassIdentifier: 
-  taskInfo: "\u0412\u044B\u0431\u0440\u0430\u0442\u044C\u0441\u044F \u0438\u0437
-    \u0432\u0435\u043D\u0442\u0438\u043B\u044F\u0446\u0438\u0438"
+  taskInfo: "\u041F\u0435\u0440\u0435\u0439\u0434\u0438\u0442\u0435 \u043F\u043E
+    \u0432\u0435\u043D\u0442\u0438\u043B\u044F\u0446\u0438\u0438 \u0432 \u043C\u0430\u0448\u0438\u043D\u043D\u043E\u0435
+    \u043E\u0442\u0434\u0435\u043B\u0435\u043D\u0438\u0435"
   firstAvailableDay: 3
   lastAvailableDay: 3
   priority: 4

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d155e993eea544483475db92c1bce2, type: 3}
   m_Name: 09TakeTask
   m_EditorClassIdentifier: 
-  taskInfo: "\u0412\u0437\u044F\u0442\u044C \u0436\u0443\u0447\u043A\u0430 \u0440\u0443\u043A\u043E\u0439"
+  taskInfo: "\u041F\u043E\u0434\u0431\u0435\u0440\u0438\u0442\u0435 \u0436\u0443\u0447\u043A\u0430
+    \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E \u0440\u043E\u0431\u043E\u0440\u0443\u043A\u0438"
   firstAvailableDay: 3
   lastAvailableDay: 3
   priority: 2
