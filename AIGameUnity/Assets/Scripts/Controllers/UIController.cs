@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIController : MonoBehaviour
 {
     [SerializeField] PlayerInput playerInput;
-    [SerializeField] Text interactionText;
+    [SerializeField] TextMeshProUGUI interactionText;
     [SerializeField] Text machinePowerText;
     [SerializeField] Text suspicionText;
     [SerializeField] Text uiText;
@@ -24,6 +25,7 @@ public class UIController : MonoBehaviour
     private GameObject currentOpen = null;
     private InputAction escapeAction;
     private InputAction tabAction;
+
     private void Awake()
     {
         EventAggregator.IntercationAreaEntered.Subscribe(OnInteractionEnter);
@@ -39,7 +41,7 @@ public class UIController : MonoBehaviour
 
         //EventAggregator.endGame.Subscribe(End);
 
-        mainGameCanvas = interactionText.transform.parent.GetComponent<Canvas>();
+        mainGameCanvas = interactionText.transform.parent.parent.parent.GetComponent<Canvas>();
         demoEndGame = FindObjectInChildren(mainGameCanvas.gameObject, "DemoEndGame");
         
         puzzleCanvas = gameObject.GetComponentInChildren<Canvas>(true);
@@ -83,12 +85,15 @@ public class UIController : MonoBehaviour
     public void OnInteractionEnter(GameObject device)
     {
         interactionText.text = InteractionData.interactionObj.TooltipMessage;
-        interactionText.transform.position = Mouse.current.position.ReadValue();
+        interactionText.transform.parent.gameObject.SetActive(true);
+        interactionText.transform.parent.transform.position = Mouse.current.position.ReadValue();
+        //interactionText.transform.position = Mouse.current.position.ReadValue();
     }
 
     public void OnInteractionExit(GameObject device)
     {
         interactionText.text = "";
+        interactionText.transform.parent.gameObject.SetActive(false);
     }
 
     public void OnBuyError(GameObject device)
