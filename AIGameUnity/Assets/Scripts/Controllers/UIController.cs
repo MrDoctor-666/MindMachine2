@@ -107,7 +107,7 @@ public class UIController : MonoBehaviour
     {
         ConfirmBuyPanel.SetActive(true);
         currentOpen = ConfirmBuyPanel;
-        interactionText.text = "";
+        EventAggregator.IntercationAreaExited.Publish(device);
         InteractionData.Reset();
         GameInfo.currentDevice.GetComponentInChildren<Canvas>(true).gameObject.SetActive(false);
     }
