@@ -91,10 +91,11 @@ public class DeviceController : MonoBehaviour
 
     public void OnDeviceBought()
     {
+        string messageIfUnlocked = deviceBuy.GetComponent<OnClickDevice>().messageIfUnlocked;
         currentDevice.GetComponentInChildren<AudioListener>().enabled = false;
         EventAggregator.puzzleStarted.Publish(deviceBuy);
         deviceBuy.GetComponent<DeviceInfo>().isBlocked = false;
-        deviceBuy.GetComponent<OnClickDevice>().SwitchTooltipMessage("Switch");
+        deviceBuy.GetComponent<OnClickDevice>().SwitchTooltipMessage(messageIfUnlocked);
         GameInfo.DecreaseCompPower(deviceBuy.GetComponent<DeviceInfo>().cost);
         Debug.Log(GameInfo.computingPower);
         deviceBuy = null;

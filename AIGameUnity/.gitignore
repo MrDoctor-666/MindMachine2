@@ -12,6 +12,8 @@
 [Aa]ssets/TextMesh Pro/
 .idea/
 .vsconfig
+
+
 #Folder with ultraheavy files
 [Aa]ssets/Materials
 [Aa]ssets/MaterialsLocal
@@ -36,6 +38,10 @@
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
+
+#Save's
+[Aa]ssets/Save.xml
+[Aa]ssets/Save.xml.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*

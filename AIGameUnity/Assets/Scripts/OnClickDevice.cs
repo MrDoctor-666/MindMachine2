@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class OnClickDevice : InteractableBase
 {
+    public string messageIfUnlocked;
+    [SerializeField] private string messageIfBlocked;
+
     private void Awake()
     {
         if (GetComponent<DeviceInfo>().isBlocked)
-            SwitchTooltipMessage("Blocked. Cost: " + GetComponent<DeviceInfo>().cost);
-        else SwitchTooltipMessage("Switch");
+            SwitchTooltipMessage(messageIfBlocked +" "+ GetComponent<DeviceInfo>().cost);
+        else SwitchTooltipMessage(messageIfUnlocked);
     }
+
     public override void OnInteract()
     {
         if (gameObject.GetComponent<DeviceInfo>().isBlocked == false)
