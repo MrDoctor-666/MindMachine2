@@ -1,7 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndingsController : MonoBehaviour
 {
@@ -41,7 +39,13 @@ public class EndingsController : MonoBehaviour
 
     private void afterCutscene()
     {
-        Debug.Log("END CUTSCENE ENDED");
+        if (isEndingStarted)
+        {
+            Debug.Log("END CUTSCENE ENDED");
+            EventAggregator.Reset();
+            GameInfo.Reset();
+            SceneManager.LoadScene("MainMenuScene");
+        }
         //do something here
     }
 
