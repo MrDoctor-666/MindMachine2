@@ -44,7 +44,7 @@ public class EndingsController : MonoBehaviour
             Debug.Log("END CUTSCENE ENDED");
             EventAggregator.Reset();
             GameInfo.Reset();
-            SceneManager.LoadScene("MainMenuScene");
+            SceneManager.LoadScene("Credits");
         }
         //do something here
     }
