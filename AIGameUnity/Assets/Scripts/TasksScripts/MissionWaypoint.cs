@@ -17,6 +17,8 @@ public class MissionWaypoint : MonoBehaviour
     private void Awake()
     {
         EventAggregator.changeMissionWaypoint.Subscribe(RefreshTransformWaypoint);
+        if (GameInfo.isUsingMarker == true) img.gameObject.SetActive(true);
+        else img.gameObject.SetActive(false);
     }
 
     private void Update()

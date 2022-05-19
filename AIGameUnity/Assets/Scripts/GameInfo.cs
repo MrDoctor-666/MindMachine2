@@ -29,6 +29,7 @@ public static class GameInfo
     public static float suspicion = 10;
     public static GameObject currentDevice;
     public static DeviceInfo[] devices;
+    public static bool isUsingMarker = true;
     public static Dictionary<string, Characters> people = new Dictionary<string, Characters>()
     {
         { "капитан", Characters.Captain},
