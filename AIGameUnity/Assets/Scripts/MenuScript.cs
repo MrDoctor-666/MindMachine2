@@ -7,12 +7,8 @@ public class MenuScript: MonoBehaviour
 {
     [SerializeField] private SaveManager sm;
 
-    public void ReloadDay()
-    {
-        if (sm)
-            sm.Load();
-    }
-
+    public void ReloadDay() => SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    
     public void QuitToMenu()
     {
         EventAggregator.Reset();
