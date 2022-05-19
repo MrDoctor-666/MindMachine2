@@ -10,7 +10,6 @@ public class CameraRoboarm : MonoBehaviour
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private float movementSpeed;
     [SerializeField] private int liftingHeight = 5;
-    [SerializeField] private int startingHeight = 1;
     [SerializeField] private float maxInteractDistance = 100f;
     [SerializeField] private bool canUpDown;
     private bool under = true;
@@ -37,10 +36,12 @@ public class CameraRoboarm : MonoBehaviour
         defCameraInputAction = playerInput.currentActionMap.FindAction("DefCamera");
         approachAction = playerInput.currentActionMap.FindAction("Approach");
 
-        approachAction.performed += OnApproach;
         defCameraInputAction.performed += OnDefCamera;
+        approachAction.performed += OnApproach;
         defaultposForCam = gameObject.transform.localPosition;
         if (canUpDown) upDownInputAction.performed += OnUpDown;
+
+        defCameraInputAction.Disable();
     }
 
     void Update()
@@ -56,7 +57,10 @@ public class CameraRoboarm : MonoBehaviour
 
     private void OnUpDown(InputAction.CallbackContext context)
     {
-        moveUpDownCommand = true;
+        if (roboarm.isActive)
+        {
+            moveUpDownCommand = true;
+        }
     }
 
     private void MovingUpDown()
@@ -77,7 +81,7 @@ public class CameraRoboarm : MonoBehaviour
             }
             else
             {
-                if (transform.localPosition.y < startingHeight)
+                if (transform.localPosition.y < defaultposForCam.y)
                 {
                     transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + Time.deltaTime * movementSpeed, transform.localPosition.z);
                 }
@@ -92,8 +96,11 @@ public class CameraRoboarm : MonoBehaviour
 
     private void OnApproach(InputAction.CallbackContext context)
     {
-        action = true;
-        ApproachMoving();
+        if (roboarm.isActive)
+        {
+            action = true;
+            ApproachMoving();
+        }
     }
 
     private void ApproachMoving()
@@ -114,6 +121,7 @@ public class CameraRoboarm : MonoBehaviour
                 if (interact == null) return;
                 if (interact.CameraApproach == true)
                 {
+                    defCameraInputAction.Enable();
                     moveTo = hit.collider.gameObject;
                     Transform[] transformForCam = hit.transform.GetComponentsInChildren<Transform>();
                     if (transformForCam[1] != null)
@@ -153,6 +161,7 @@ public class CameraRoboarm : MonoBehaviour
             transform.localPosition = defaultposForCam;
             moveTo.GetComponent<Collider>().enabled = true;
             beReady = true;
+            defCameraInputAction.Disable();
         }
     }
     private void OnDefCamera()
@@ -162,6 +171,7 @@ public class CameraRoboarm : MonoBehaviour
             transform.localPosition = defaultposForCam;
             moveTo.GetComponent<Collider>().enabled = true;
             beReady = true;
+            defCameraInputAction.Disable();
         }
     }
 }
