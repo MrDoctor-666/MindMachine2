@@ -18,6 +18,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject ConfirmBuyPanel;
     [SerializeField] private GameObject TabMenu;
     [SerializeField] private GameObject EscMenu;
+    [SerializeField] private GameObject SettingsMenu;
+
     GameObject demoEndGame;
 
     Canvas mainGameCanvas;
@@ -80,6 +82,18 @@ public class UIController : MonoBehaviour
         if (currentOpen != null) EventAggregator.PanelClosed.Publish();
         else EventAggregator.PanelOpened.Publish(EscMenu);
         //open pause menu
+    }
+
+    public void OnBack() //override for back button in UI
+    {
+        SettingsMenu.SetActive(false);
+        EscMenu.SetActive(true);
+    }
+
+    public void OnSettings()
+    {
+        SettingsMenu.SetActive(true);
+        EscMenu.SetActive(false);
     }
 
     public void OnInteractionEnter(GameObject device)
