@@ -21,7 +21,9 @@ public class Lift : MonoBehaviour
             GetComponent<BoxCollider>().bounds.Contains(other.bounds.max))
         {
             Debug.Log("Lift entered");
+            EventAggregator.endMoving.Publish(device);
             StartCoroutine(Teleport());
+            EventAggregator.liftMovingEvent.Publish();
         }
     }
 
@@ -44,7 +46,6 @@ public class Lift : MonoBehaviour
         Vector3 destPosition = destination.transform.position;
         destPosition.y += device.transform.localScale.y/2; //half of the deliveryBot high
         device.GetComponent<DeviceInfo>().isActive = false;
-        EventAggregator.endMoving.Publish(device);
         yield return new WaitForSeconds(teleportationTime);
 
         destination.GetComponentInChildren<Lift>().isTeleportedTo = true;
