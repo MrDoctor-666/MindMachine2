@@ -15,6 +15,6 @@ public class SettingsUI : MonoBehaviour
 
     public void ChangeVolume(float volume)
     {
-        masterVolume.audioMixer.SetFloat("MasterVolume", Mathf.Lerp(-80, 0,volume));
+        masterVolume.audioMixer.SetFloat("MasterVolume", Mathf.Lerp(-60,0,volume));
     }
 }

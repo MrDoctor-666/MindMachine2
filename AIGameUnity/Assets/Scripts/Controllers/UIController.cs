@@ -79,7 +79,11 @@ public class UIController : MonoBehaviour
 
     public void OnEscape(InputAction.CallbackContext context)
     {
-        if (currentOpen != null) EventAggregator.PanelClosed.Publish();
+        if (currentOpen != null)
+        {
+            EventAggregator.PanelClosed.Publish();
+            SettingsMenu.SetActive(false);
+        }
         else EventAggregator.PanelOpened.Publish(EscMenu);
         //open pause menu
     }
