@@ -8,15 +8,22 @@ public class SoundController : MonoBehaviour
 {
     //there are events for each field in comments
 
-    [SerializeField] private AudioSource moveSound;
+    [Header("AudioSources (SoundController's childrens)")]
+    [SerializeField] private AudioSource livingRoomBackground;
+    [SerializeField] private AudioSource engineRoomBackground;
     [SerializeField] private AudioSource puzzleBackground;
-
+    [SerializeField] private AudioSource moveSound;
     [SerializeField] private List<GameObject> audioChannels;
 
     [Header("AudioMixerGroups")]
     [SerializeField] private AudioMixerGroup devices;
     [SerializeField] private AudioMixerGroup effects;
     [SerializeField] private AudioMixerGroup voices;
+
+    [Header("Background")]
+    [SerializeField] private List<AudioClip> livingRoom;
+    [SerializeField] private List<AudioClip> engineRoom;
+    [SerializeField] private AudioClip puzzleScene;
 
     [Header("Devices")]
     [SerializeField] private AudioClip capture; //deviceBought event  
@@ -54,9 +61,8 @@ public class SoundController : MonoBehaviour
     [SerializeField] private AudioClip panelClosed; //PanelClosed
     [SerializeField] private AudioClip clickButtonUI; //clickButtonUI
 
-
-    private string currentRoom = "livingRoom";
-    private SoundSource backgroundSoundSource;
+    private SoundSource livingRoomSource;
+    private SoundSource engineRoomSource;
     private List<SoundSource> soundSources;
     private List<AudioSource> audioSources;
 
@@ -71,6 +77,8 @@ public class SoundController : MonoBehaviour
         inMenu = devices.audioMixer.FindSnapshot("In Menu");
         moveSound.loop = true;
 
+        livingRoomSource = livingRoomBackground.gameObject.GetComponent<SoundSource>();
+        engineRoomSource = engineRoomBackground.gameObject.GetComponent<SoundSource>();
 
         EventSubsciption();
         soundSources = new List<SoundSource>();
@@ -116,11 +124,51 @@ public class SoundController : MonoBehaviour
         EventAggregator.DeviceBuyTried.Subscribe(OnPanelOpened);
     }
 
+    private void Update()
+    {
+        Background(livingRoomSource, livingRoom, livingRoomBackground);
+        Background(engineRoomSource, engineRoom, engineRoomBackground);
+    }
+
+    private void Background(SoundSource soundSource, List<AudioClip> list, AudioSource audioSource)
+    {
+        if (soundSource.isFree)
+        {
+            if (list.Count != 0)
+            { 
+                int range = Random.Range(0, list.Count);
+                audioSource.clip = list[range];
+                audioSource.Play();
+                soundSource.PlayCounterTime();
+            }
+        }
+    }
+
+
+
     /*private void Background()
     {
-        if (backgroundSoundSource.isFree)
+        if (livingRoomSource.isFree)
         {
-            switch (currentRoom)
+            int rangeLivingRoom = Random.Range(0, livingRoom.Count);
+            livingRoomBackground.clip = livingRoom[rangeLivingRoom];
+        }
+
+        if (engineRoomSource.isFree)
+        {
+            int rangeEngineRoom = Random.Range(0, engineRoom.Count);
+            engineRoomBackground.clip = engineRoom[rangeEngineRoom];
+        }
+
+        if (puzzleSceneSource.isFree)
+        {
+            int rangePuzzleScene = Random.Range(0, puzzleScene.Count);
+            puzzleBackground.clip = puzzleScene[rangePuzzleScene];
+        }
+
+
+
+        switch (currentRoom)
             {
                 case ("livingRoom"):
                     int rangeLivingRoom = Random.Range(0, livingRoom.Count);
@@ -264,6 +312,7 @@ public class SoundController : MonoBehaviour
 
     private void OnPuzzleStarted(GameObject device)
     {
+        puzzleBackground.clip = puzzleScene;
         puzzleBackground.Play();
         Revise(startPuzzle, effects);
     }
