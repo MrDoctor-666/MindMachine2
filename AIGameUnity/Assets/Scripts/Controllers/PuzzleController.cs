@@ -63,11 +63,12 @@ public class PuzzleController : MonoBehaviour
         switch (puzzleEnd)
         {
             case PuzzleEnd.Algorithm:
-                GameInfo.DecreaseSuspicion(curDevice.GetComponent<IPuzzled>().minusSuspitionAlgorithm);
+                //GameInfo.DecreaseSuspicion(curDevice.GetComponent<IPuzzled>().minusSuspitionAlgorithm);
+                GameInfo.IncreaseCompPower(curDevice.GetComponent<IPuzzled>().compPowerAlgorithm);
                 break;
             case PuzzleEnd.Sabotage:
                 GameInfo.IncreaseSuspicion(curDevice.GetComponent<IPuzzled>().suspicionSabotage);
-                GameInfo.IncreaseCompPower(curDevice.GetComponent<IPuzzled>().prizeSabotge);
+                //GameInfo.IncreaseCompPower(curDevice.GetComponent<IPuzzled>().prizeSabotge);
                 break;
         }
         //open some panel with info 

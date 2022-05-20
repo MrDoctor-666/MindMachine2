@@ -59,7 +59,7 @@ public class DialogueManager : MonoBehaviour
         isInMonologue = true;
         this.dialogue = dialogue;
         Debug.Log("Starting Conversation");
-        EventAggregator.PanelOpened.Publish(panel);
+        //EventAggregator.PanelOpened.Publish(panel);
         characterNameColored = "";
         characterName = "";
         if (!LoadDocument()) return;

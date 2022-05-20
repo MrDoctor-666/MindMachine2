@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IPuzzled
 {
-    public float prizeSabotge { get; set; }
+    public float compPowerAlgorithm { get; set; }
     public float suspicionSabotage { get; set; }
-    public float minusSuspitionAlgorithm { get; set; }
+    //public float minusSuspitionAlgorithm { get; set; }
 }

@@ -18,6 +18,7 @@ public class UIButtons : MonoBehaviour
 
         //actually buy it
         EventAggregator.deviceBought.Publish();
+        EventAggregator.PanelClosed.Publish();
         gameObject.SetActive(false);
     }
     public void YesToSwitchDay()

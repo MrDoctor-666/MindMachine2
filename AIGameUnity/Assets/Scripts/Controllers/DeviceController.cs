@@ -21,6 +21,7 @@ public class DeviceController : MonoBehaviour
         EventAggregator.deviceBought.Subscribe(OnDeviceBought);
 
         EventAggregator.PanelOpened.Subscribe(OnStopWorking);
+        EventAggregator.DialogueStarted.Subscribe(OnStopWorking);
         EventAggregator.PanelClosed.Subscribe(OnResumeWorking);
 
         EventAggregator.puzzleStarted.Subscribe(OnStopWorking);

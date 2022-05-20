@@ -19,6 +19,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject TabMenu;
     [SerializeField] private GameObject EscMenu;
     [SerializeField] private GameObject SettingsMenu;
+    [SerializeField] private GameObject dialoguePanel;
 
     GameObject demoEndGame;
 
@@ -36,6 +37,7 @@ public class UIController : MonoBehaviour
         EventAggregator.DeviceBuyTried.Subscribe(OnBuyTry);
         EventAggregator.PanelOpened.Subscribe(OnPanelOpened);
         EventAggregator.PanelClosed.Subscribe(OnPanelClosed);
+        EventAggregator.DialogueStarted.Subscribe(OnDialogueStarted);
         EventAggregator.newDayStarted.Subscribe(OnDaysUI);
 
         EventAggregator.puzzleStarted.Subscribe(TurnOffAllUI);
@@ -45,6 +47,7 @@ public class UIController : MonoBehaviour
 
         mainGameCanvas = interactionText.transform.parent.parent.parent.GetComponent<Canvas>();
         demoEndGame = FindObjectInChildren(mainGameCanvas.gameObject, "DemoEndGame");
+        dialoguePanel = FindObjectInChildren(mainGameCanvas.gameObject, "DialoguePanel");
         
         puzzleCanvas = gameObject.GetComponentInChildren<Canvas>(true);
         ErrorBuyPanel.SetActive(false);
@@ -79,12 +82,12 @@ public class UIController : MonoBehaviour
 
     public void OnEscape(InputAction.CallbackContext context)
     {
-        if (currentOpen != null)
+        if (currentOpen != null /*&& currentOpen != dialoguePanel*/)
         {
             EventAggregator.PanelClosed.Publish();
             SettingsMenu.SetActive(false);
         }
-        else EventAggregator.PanelOpened.Publish(EscMenu);
+        else if (currentOpen == null) EventAggregator.PanelOpened.Publish(EscMenu);
         //open pause menu
     }
 
@@ -127,6 +130,12 @@ public class UIController : MonoBehaviour
         currentOpen = ConfirmBuyPanel;
         EventAggregator.IntercationAreaExited.Publish(device);
         InteractionData.Reset();
+        GameInfo.currentDevice.GetComponentInChildren<Canvas>(true).gameObject.SetActive(false);
+    }
+
+    public void OnDialogueStarted(GameObject d)
+    {
+        OnPanelOpened(dialoguePanel);
         GameInfo.currentDevice.GetComponentInChildren<Canvas>(true).gameObject.SetActive(false);
     }
 

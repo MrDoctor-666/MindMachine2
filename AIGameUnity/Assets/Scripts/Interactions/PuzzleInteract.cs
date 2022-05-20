@@ -6,17 +6,17 @@ using UnityEngine;
 public class PuzzleInteract : InteractableBase, IPuzzled
 {
     [Header("Puzzle Settings")]
-    [SerializeField] private float prizeSabotge;
+    [SerializeField] private float compPowerAlgorithm;
     [SerializeField] private float suspicionSabotage;
-    [SerializeField] private float minusSuspitionAlgorithm;
+    //[SerializeField] private float minusSuspitionAlgorithm;
 
     [Header("IF YOU NEED CUTSCENE AFTER")]
     [SerializeField] GameObject algorithmEnd;
     [SerializeField] GameObject sabotageEnd;
 
-    float IPuzzled.prizeSabotge { get => prizeSabotge; set => prizeSabotge = value; }
+    float IPuzzled.compPowerAlgorithm { get => compPowerAlgorithm; set => compPowerAlgorithm = value; }
     float IPuzzled.suspicionSabotage { get => suspicionSabotage; set => suspicionSabotage = value; }
-    float IPuzzled.minusSuspitionAlgorithm { get => minusSuspitionAlgorithm; set => minusSuspitionAlgorithm = value; }
+    //float IPuzzled.minusSuspitionAlgorithm { get => minusSuspitionAlgorithm; set => minusSuspitionAlgorithm = value; }
 
     bool isStarted = false;
 
