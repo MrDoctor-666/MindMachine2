@@ -8,6 +8,7 @@ public class MainMenuScript : MonoBehaviour
 {
     [SerializeField] GameObject main;
     [SerializeField] GameObject newGame;
+    [SerializeField] GameObject settings;
     //[SerializeField] GameObject continueGame;
 
 
@@ -35,6 +36,16 @@ public class MainMenuScript : MonoBehaviour
     {
         main.SetActive(false);
         newGame.SetActive(true);
+    }
+
+    public void OpenSettings()
+    {
+        settings.SetActive(true);
+    }
+
+    public void CloseSettings()
+    {
+        settings.SetActive(false);
     }
 
     public void Back()
