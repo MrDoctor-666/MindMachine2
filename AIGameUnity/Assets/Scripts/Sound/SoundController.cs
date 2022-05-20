@@ -8,8 +8,8 @@ public class SoundController : MonoBehaviour
 {
     //there are events for each field in comments
 
-    [SerializeField] private AudioSource roomSound;
     [SerializeField] private AudioSource moveSound;
+    [SerializeField] private AudioSource puzzleBackground;
 
     [SerializeField] private List<GameObject> audioChannels;
 
@@ -17,11 +17,6 @@ public class SoundController : MonoBehaviour
     [SerializeField] private AudioMixerGroup devices;
     [SerializeField] private AudioMixerGroup effects;
     [SerializeField] private AudioMixerGroup voices;
-
-    [Header("Background Music")]
-    [SerializeField] private List<AudioClip> livingRoom;
-    [SerializeField] private List<AudioClip> engineRoom;
-    [SerializeField] private AudioClip puzzleScene;
 
     [Header("Devices")]
     [SerializeField] private AudioClip capture; //deviceBought event  
@@ -74,8 +69,6 @@ public class SoundController : MonoBehaviour
     {
         main = devices.audioMixer.FindSnapshot("Main");
         inMenu = devices.audioMixer.FindSnapshot("In Menu");
-        backgroundSoundSource = roomSound.gameObject.GetComponent<SoundSource>();
-        roomSound.loop = true;
         moveSound.loop = true;
 
 
@@ -89,11 +82,6 @@ public class SoundController : MonoBehaviour
             Debug.Log(soundSources[i]);
             Debug.Log(audioSources[i]);
         }
-    }
-
-    private void Update()
-    {
-        Background();
     }
 
     private void EventSubsciption()
@@ -128,7 +116,7 @@ public class SoundController : MonoBehaviour
         EventAggregator.DeviceBuyTried.Subscribe(OnPanelOpened);
     }
 
-    private void Background()
+    /*private void Background()
     {
         if (backgroundSoundSource.isFree)
         {
@@ -152,7 +140,7 @@ public class SoundController : MonoBehaviour
             backgroundSoundSource.PlayCounterTime();
 
         }
-    }
+    }*/
 
     private void Revise(AudioClip nameSound, AudioMixerGroup nameMixerGroup)
     {
@@ -276,6 +264,7 @@ public class SoundController : MonoBehaviour
 
     private void OnPuzzleStarted(GameObject device)
     {
+        puzzleBackground.Play();
         Revise(startPuzzle, effects);
     }
 
@@ -292,6 +281,7 @@ public class SoundController : MonoBehaviour
                 Revise(sabotageEnd, effects);
                 break;
         }
+        puzzleBackground.Stop();
     }
 
     private void OnPushButton()
