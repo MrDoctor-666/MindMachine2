@@ -21,6 +21,9 @@ public class SnakeManagerNew : MonoBehaviour
             Transform[] trs = instance.GetComponentsInChildren<Transform>();
             List<GameObject> gos = new List<GameObject>(trs.Length);
 
+            if (gos.Contains(instance))
+                gos.Remove(instance);
+
             for (int i = 0; i < trs.Length; ++i)
                 gos.Add(trs[i].gameObject);
 
@@ -31,10 +34,7 @@ public class SnakeManagerNew : MonoBehaviour
             for (int i = 0; i < way.Length; ++i)
                 way[i] = gos[i].transform.position;
 
-            way = way.ToArray();
-
             this.instance.transform.position = way[0];
-            print(way.Length);
         }
 
         public void Move()
