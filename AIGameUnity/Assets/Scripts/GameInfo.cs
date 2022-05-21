@@ -25,8 +25,8 @@ public enum Endings
 
 public static class GameInfo
 {
-    public static float computingPower = 10;
-    public static float suspicion = 10;
+    public static float computingPower = 0;
+    public static float suspicion = 0;
     public static GameObject currentDevice;
     public static DeviceInfo[] devices;
     public static bool isUsingMarker = true;
@@ -61,8 +61,8 @@ public static class GameInfo
 
     public static void Reset()
     {
-        computingPower = 10;
-        suspicion = 10;
+        computingPower = 0;
+        suspicion = 0;
         currentDevice = null;
         devices = null;
     }

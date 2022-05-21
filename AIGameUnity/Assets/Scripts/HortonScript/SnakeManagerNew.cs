@@ -31,9 +31,10 @@ public class SnakeManagerNew : MonoBehaviour
             for (int i = 0; i < way.Length; ++i)
                 way[i] = gos[i].transform.position;
 
-            way = way.Distinct().ToArray();
+            way = way.ToArray();
 
             this.instance.transform.position = way[0];
+            print(way.Length);
         }
 
         public void Move()
