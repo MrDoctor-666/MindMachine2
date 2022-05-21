@@ -165,6 +165,8 @@ public class UIController : MonoBehaviour
         mainGameCanvas.gameObject.SetActive(false);
         puzzleCanvas.gameObject.SetActive(true);
         GameInfo.currentDevice.GetComponentInChildren<Canvas>(true).gameObject.SetActive(false);
+        escapeAction.Disable();
+        tabAction.Disable();
     }
 
     void TurnOnAllUI(PuzzleEnd puzzEnd)
@@ -173,6 +175,8 @@ public class UIController : MonoBehaviour
         puzzleCanvas.gameObject.SetActive(false);
         EventAggregator.PanelClosed.Publish();
         GameInfo.currentDevice.GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
+        escapeAction.Enable();
+        tabAction.Enable();
     }
 
     void End()

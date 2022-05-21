@@ -312,8 +312,13 @@ public class SoundController : MonoBehaviour
 
     private void OnPuzzleStarted(GameObject device)
     {
+
+        main.TransitionTo(0);
+
         puzzleBackground.clip = puzzleScene;
         puzzleBackground.Play();
+        livingRoomBackground.Stop();
+        engineRoomBackground.Stop();
         Revise(startPuzzle, effects);
     }
 
@@ -330,7 +335,11 @@ public class SoundController : MonoBehaviour
                 Revise(sabotageEnd, effects);
                 break;
         }
+
         puzzleBackground.Stop();
+        livingRoomBackground.Play();
+        engineRoomBackground.Play();
+
     }
 
     private void OnPushButton()
@@ -350,14 +359,14 @@ public class SoundController : MonoBehaviour
 
     private void OnPanelOpened(GameObject panel)
     {
-        Revise(panelOpened, effects);
-        inMenu.TransitionTo(timeBetwChangeSnaps);
+            Revise(panelOpened, effects);
+            inMenu.TransitionTo(timeBetwChangeSnaps);
     }
 
     private void OnPanelClosed()
     {
-        Revise(panelClosed, effects);
-        main.TransitionTo(timeBetwChangeSnaps);
+            Revise(panelClosed, effects);
+            main.TransitionTo(timeBetwChangeSnaps);        
     }
 
     private void OnClickButtonUI()

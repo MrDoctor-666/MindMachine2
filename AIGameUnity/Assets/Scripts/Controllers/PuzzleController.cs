@@ -9,11 +9,13 @@ public class PuzzleController : MonoBehaviour
     private GameObject curDevice;
     [SerializeField] Camera puzzleCamera;
     [SerializeField] List<GameObject> puzzleLevels = new List<GameObject>();
+    private DeviceController deviceController;
 
     int curPuzzleLevel = 0;
     GameObject puz;
     private void Awake()
     {
+        deviceController = gameObject.GetComponent<DeviceController>();
         EventAggregator.puzzleStarted.Subscribe(OnPuzzleStarted);
         EventAggregator.puzzleEnded.Subscribe(OnPuzzleEnded);
         puzzleCamera.enabled = false;
@@ -42,6 +44,8 @@ public class PuzzleController : MonoBehaviour
         puzzleCamera.enabled = true;
         Cursor.visible = true;
 
+        //DeviceInfo deviceInfo = deviceController.currentDevice.GetComponent<DeviceInfo>();
+        //if (deviceInfo != null) deviceInfo.isActive = false;
 
         //puzzleCamera.GetComponent<PlayerInput>().enabled = true;
         //puzzleCamera.GetComponent<SnakeManagerNew>().NewStart();
@@ -49,6 +53,8 @@ public class PuzzleController : MonoBehaviour
 
     public void OnPuzzleEnded(PuzzleEnd puzzleEnd)
     {
+        //DeviceInfo deviceInfo = deviceController.currentDevice.GetComponent<DeviceInfo>();
+        //if (deviceInfo != null) deviceInfo.isActive = true;
 
         //puzzleCamera.GetComponent<PlayerInput>().enabled = false;
         puzzleCamera.gameObject.GetComponent<AudioListener>().enabled = false;
