@@ -46,16 +46,10 @@ public class PuzzleController : MonoBehaviour
 
         //DeviceInfo deviceInfo = deviceController.currentDevice.GetComponent<DeviceInfo>();
         //if (deviceInfo != null) deviceInfo.isActive = false;
-
-        //puzzleCamera.GetComponent<PlayerInput>().enabled = true;
-        //puzzleCamera.GetComponent<SnakeManagerNew>().NewStart();
     }
 
     public void OnPuzzleEnded(PuzzleEnd puzzleEnd)
     {
-        //DeviceInfo deviceInfo = deviceController.currentDevice.GetComponent<DeviceInfo>();
-        //if (deviceInfo != null) deviceInfo.isActive = true;
-
         //puzzleCamera.GetComponent<PlayerInput>().enabled = false;
         puzzleCamera.gameObject.GetComponent<AudioListener>().enabled = false;
         puzzleCamera.GetComponent<Camera>().enabled = false;
