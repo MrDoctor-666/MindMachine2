@@ -121,6 +121,7 @@ public class CameraRoboarm : MonoBehaviour
                 if (interact == null) return;
                 if (interact.CameraApproach == true)
                 {
+                    EventAggregator.endMoving.Publish(gameObject);
                     defCameraInputAction.Enable();
                     moveTo = hit.collider.gameObject;
                     Transform[] transformForCam = hit.transform.GetComponentsInChildren<Transform>();
