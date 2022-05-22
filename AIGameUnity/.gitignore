@@ -39,9 +39,13 @@
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
 
+#materials.meta
+[Aa]ssets/Materials.meta
+
 #Save's
 [Aa]ssets/Save.xml
 [Aa]ssets/Save.xml.meta
+
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
