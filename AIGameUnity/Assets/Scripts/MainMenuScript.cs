@@ -12,7 +12,12 @@ public class MainMenuScript : MonoBehaviour
     //[SerializeField] GameObject continueGame;
 
 
-    public void StartScene(string name) => SceneTransition.SwitchToScene(name);
+    public void StartScene(string name)
+    {
+        EventAggregator.Reset();
+        GameInfo.Reset();
+        SceneTransition.SwitchToScene(name);
+    }
 
     public void StartNewGame(string name)
     {
