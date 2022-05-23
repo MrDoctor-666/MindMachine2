@@ -1,23 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DevicesSummon : MonoBehaviour
 {
     [SerializeField] GameObject cockroachSummonPlace;
     [SerializeField] GameObject deliverySummonPlace;
 
-   public void SummonCockroach()
+    [SerializeField] Sprite activeSprite;
+    [SerializeField] Sprite inactiveSprite;
+
+    [SerializeField] Button deliveryButton;
+    [SerializeField] Button cockroachButton;
+
+    [SerializeField] DeviceInfo cockroach = null;
+    [SerializeField] DeviceInfo delivery = null;
+
+    private void OnEnable()
+    {
+        if (cockroach == null) FindCockroach();
+        if (cockroachButton != null && cockroach.isBlocked == false)
+        {
+            cockroachButton.GetComponent<Image>().sprite = activeSprite;
+            cockroachButton.enabled = true;
+        }
+        else if (cockroachButton != null)
+        {
+            cockroachButton.GetComponent<Image>().sprite = inactiveSprite;
+            cockroachButton.enabled = false;
+        }
+
+        if (delivery == null) FindDelivery();
+        if (deliveryButton != null && delivery.isBlocked == false)
+        {
+            deliveryButton.GetComponent<Image>().sprite = activeSprite;
+            deliveryButton.enabled = true;
+        }
+        else if (deliveryButton != null)
+        {
+            deliveryButton.GetComponent<Image>().sprite = inactiveSprite;
+            deliveryButton.enabled = false;
+        }
+
+    }
+
+    public void SummonCockroach()
     {
         StopAllCoroutines();
-        DeviceInfo cockroach = null;
         //get cockroach device
-        foreach (DeviceInfo device in GameInfo.devices)
-            if (device.gameObject.tag == "Bug" && device.isBlocked == false)
-            {
-                cockroach = device;
-                break;
-            }
+        if (cockroach == null) FindCockroach();
         if (cockroach == null) return;
         cockroach.GetComponent<Rigidbody>().isKinematic = false;
         Vector3 sizeVec = cockroach.gameObject.GetComponent<Collider>().bounds.size;
@@ -34,7 +66,18 @@ public class DevicesSummon : MonoBehaviour
         StartCoroutine(Land(cockroach));
         EventAggregator.PanelClosed.Publish();
 
-        EventAggregator.puzzleEnded.Publish(PuzzleEnd.Algorithm);
+        //wtf why is it here??
+        //EventAggregator.puzzleEnded.Publish(PuzzleEnd.Algorithm);
+    }
+
+    void FindCockroach()
+    {
+        foreach (DeviceInfo device in GameInfo.devices)
+            if (device.gameObject.tag == "Bug")
+            {
+                cockroach = device;
+                break;
+            }
     }
 
     IEnumerator Land(DeviceInfo cockroach)
@@ -45,14 +88,8 @@ public class DevicesSummon : MonoBehaviour
 
     public void SummonDelivery()
     {
-        DeviceInfo delivery = null;
         //get cockroach device
-        foreach (DeviceInfo device in GameInfo.devices)
-            if (device.gameObject.tag == "DeliveryBot" && device.isBlocked == false)
-            {
-                delivery = device;
-                break;
-            }
+        if (delivery == null) FindDelivery();
         if (delivery == null) return;
 
         //get destination position
@@ -64,5 +101,15 @@ public class DevicesSummon : MonoBehaviour
         delivery.gameObject.transform.position = destPosition;
         delivery.gameObject.transform.localEulerAngles = Vector3.zero;
         EventAggregator.PanelClosed.Publish();
+    }
+
+    void FindDelivery()
+    {
+        foreach (DeviceInfo device in GameInfo.devices)
+            if (device.gameObject.tag == "DeliveryBot")
+            {
+                delivery = device;
+                break;
+            }
     }
 }

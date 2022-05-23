@@ -5,6 +5,12 @@ using UnityEngine;
 public class InteractWithUI : InteractableBase
 {
     [SerializeField] GameObject uiToActicate;
+
+    public GameObject getUiToActivate()
+    {
+        return uiToActicate;
+    }
+
     public override void OnInteract()
     {
         base.OnInteract();
