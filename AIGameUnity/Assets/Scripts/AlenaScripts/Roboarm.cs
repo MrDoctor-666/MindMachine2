@@ -9,8 +9,8 @@ public class Roboarm : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Camera cam;
-    public static float mouseSensitivityX = 50f;
-    public static float mouseSensitivityY = 1f;
+    public static float mouseSensitivityX = 3f;
+    public static float mouseSensitivityY = 0.2f;
     [SerializeField] private float xClamp = 85f;
     [HideInInspector] public GameObject objectToSave;
     [HideInInspector] public bool buttonChangeWay = false;
