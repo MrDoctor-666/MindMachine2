@@ -9,8 +9,8 @@ public class CockroachMove : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float movementSpeed;
     [Header("Camera Rotation Settings")]
-    [SerializeField] private float mouseSensitivityX = 1f;
-    [SerializeField] private float mouseSensitivityY = 1f;
+    public static float mouseSensitivityX = 1f;
+    public static float mouseSensitivityY = 1f;
     [SerializeField] private float xClamp = 85f;
 
     Rigidbody rb;

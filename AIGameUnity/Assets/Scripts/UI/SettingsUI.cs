@@ -6,8 +6,7 @@ using UnityEngine.Audio;
 public class SettingsUI : MonoBehaviour
 {
     [SerializeField] private AudioMixerGroup masterVolume;
-    [SerializeField] private CockroachMove cockroach;
-    [SerializeField] private Roboarm roboarm;
+    [SerializeField] private float constant = 25;
 
     public void ToggleMusic(bool enabled)
     {
@@ -20,8 +19,14 @@ public class SettingsUI : MonoBehaviour
         masterVolume.audioMixer.SetFloat("MasterVolume", Mathf.Lerp(-30,0,volume));
     }
 
-    public void ChangeSensitivity(float volume)
+    public void ChangeSensitivityX(float sense)
     {
-
+        CockroachMove.mouseSensitivityX = sense;
+        Roboarm.mouseSensitivityX = constant*sense;
+    }
+    public void ChangeSensitivityY(float sense)
+    {
+        CockroachMove.mouseSensitivityY = sense;
+        Roboarm.mouseSensitivityY = sense;
     }
 }
