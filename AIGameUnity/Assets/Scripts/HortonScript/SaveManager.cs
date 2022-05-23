@@ -123,6 +123,7 @@ public class SaveManager : MonoBehaviour
         EventAggregator.DeviceSwitched.Publish(GameObject.Find(PlayerPrefs.GetString("currDevice")));
         EventAggregator.newDayStarted.Publish(daysController.currentDay =
             PlayerPrefs.HasKey("CurrentDay") ? PlayerPrefs.GetInt("CurrentDay") : 1);
+        daysController.ObjectStateChange();
         GameInfo.suspicion = PlayerPrefs.GetFloat("CurrentSuspicion");
         GameInfo.computingPower = PlayerPrefs.GetFloat("CurrentComputingPower");
         puzzleController.curPuzzleLevel = PlayerPrefs.GetInt("CurPuzzleLevel");

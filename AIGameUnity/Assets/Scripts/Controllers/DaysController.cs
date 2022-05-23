@@ -22,14 +22,14 @@ public class DaysController : MonoBehaviour
             tempObjects = new List<TempObjects>(FindObjectsOfType<TempObjects>(true));
 
         tempObjects.Sort((x, y) => x.dayDisappear.CompareTo(y.dayDisappear));
-        foreach (TempObjects tempObject in tempObjects)
-        {
-            if (currentDay >= tempObject.dayAppear && currentDay < tempObject.dayDisappear) tempObject.gameObject.SetActive(true);
-            else tempObject.gameObject.SetActive(false);
-        }
 
         EventAggregator.changeDay.Subscribe(NextDay);
         saveManager = GetComponent<SaveManager>();
+    }
+
+    private void Start()
+    {
+        ObjectStateChange();
     }
 
     public void NextDay()
@@ -55,7 +55,7 @@ public class DaysController : MonoBehaviour
 
   public  void ObjectStateChange()
     {
-        foreach (TempObjects tempObject in tempObjects)
+        /*foreach (TempObjects tempObject in tempObjects)
         {
             //turn on objects
             if (currentDay >= tempObject.dayAppear) tempObject.gameObject.SetActive(true);
@@ -65,6 +65,11 @@ public class DaysController : MonoBehaviour
                 tempObject.gameObject.SetActive(false);
                 //tempObjects.Remove(tempObject);
             }
+        }*/
+        foreach (TempObjects tempObject in tempObjects)
+        {
+            if (currentDay >= tempObject.dayAppear && currentDay < tempObject.dayDisappear) tempObject.gameObject.SetActive(true);
+            else tempObject.gameObject.SetActive(false);
         }
     }
 }

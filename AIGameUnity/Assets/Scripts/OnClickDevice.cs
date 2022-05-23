@@ -7,7 +7,7 @@ public class OnClickDevice : InteractableBase
     public string messageIfUnlocked;
     [SerializeField] private string messageIfBlocked;
 
-    private void Awake()
+    private void Start()
     {
         if (GetComponent<DeviceInfo>().isBlocked)
             SwitchTooltipMessage(messageIfBlocked +" "+ GetComponent<DeviceInfo>().cost);
