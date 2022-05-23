@@ -27,6 +27,7 @@ public class SaveManager : MonoBehaviour
      private DaysController daysController;
      private TaskManager taskManager;
      private Inventory inventory;
+     private PuzzleController puzzleController;
     [SerializeField] private GameObject[] moveableGameObjects;
 
     private void Awake()
@@ -34,12 +35,15 @@ public class SaveManager : MonoBehaviour
         daysController = GameObject.Find("GameContr").GetComponent<DaysController>();
         taskManager = GameObject.Find("GameContr").GetComponent<TaskManager>();
         inventory = GameObject.Find("GameContr").GetComponent<Inventory>();
+        puzzleController = GameObject.Find("GameContr").GetComponent<PuzzleController>();
     }
 
     private void Start()
     {
-       // PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
        Load();
+     
+       print("DIR:" +Directory.GetCurrentDirectory());
     }
 
     public void Save()
@@ -49,6 +53,7 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetInt("CurrentDay", daysController.currentDay);
         PlayerPrefs.SetFloat("CurrentSuspicion", GameInfo.suspicion);
         PlayerPrefs.SetFloat("CurrentComputingPower", GameInfo.computingPower);
+        PlayerPrefs.SetInt("CurPuzzleLevel", puzzleController.curPuzzleLevel);
         SaveTasks(taskManager.taskList, "tasks");
          SaveTasks(taskManager.allTasksList, "taskBank");
         PlayerPrefs.Save();
@@ -120,10 +125,9 @@ public class SaveManager : MonoBehaviour
             PlayerPrefs.HasKey("CurrentDay") ? PlayerPrefs.GetInt("CurrentDay") : 1);
         GameInfo.suspicion = PlayerPrefs.GetFloat("CurrentSuspicion");
         GameInfo.computingPower = PlayerPrefs.GetFloat("CurrentComputingPower");
+        puzzleController.curPuzzleLevel = PlayerPrefs.GetInt("CurPuzzleLevel");
         LoadTasks(taskManager.taskList, "tasks");
         LoadTasks(taskManager.allTasksList, "taskBank");
-        //LoadTasks();
-        // LoadDevicesTransfrom();
     }
 
     private void LoadConfiguration()

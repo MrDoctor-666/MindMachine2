@@ -11,7 +11,7 @@ public class PuzzleController : MonoBehaviour
     [SerializeField] List<GameObject> puzzleLevels = new List<GameObject>();
     private DeviceController deviceController;
 
-    int curPuzzleLevel = 0;
+   public int curPuzzleLevel = 0;
     GameObject puz;
     private void Awake()
     {
