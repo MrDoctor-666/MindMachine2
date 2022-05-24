@@ -60,7 +60,7 @@ public class CockroachMove : MonoBehaviour
             if (interact != null)
             {
                 interact.OnInteract();
-                if (interact.MultipleUse == false) interact.ChangeIfInteractable();
+                //if (interact.MultipleUse == false) interact.ChangeIfInteractable();
             }
         }
     }
