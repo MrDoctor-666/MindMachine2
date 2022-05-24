@@ -79,6 +79,7 @@ public class EventAggregator
     public static void Reset()
     {
         Debug.Log("RESET EVENT AGGREGATOR");
+        InteractionData.Reset();
         Type type = typeof(EventAggregator);
         foreach(var p in type.GetFields(System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public))
         {

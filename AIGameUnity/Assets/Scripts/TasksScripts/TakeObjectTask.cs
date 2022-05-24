@@ -7,7 +7,7 @@ public class TakeObjectTask : MonoBehaviour
 {
     [SerializeField] private TaskSO taskSo;
     [SerializeField] private Roboarm roboarm;
-    private Inventory inventory;
+    [SerializeField] Inventory inventory;
     [SerializeField] private GameObject takenGameObject;
 
     private void Awake()
@@ -17,10 +17,11 @@ public class TakeObjectTask : MonoBehaviour
 
     private void TakeObjectTaskComplete()
     {
-        if (inventory.dictionary[roboarm.id].Equals(takenGameObject))
-        {
-            EventAggregator.taskComplete.Publish(taskSo);
-        }
+        if (inventory.dictionary[roboarm.id] != null)
+            if (inventory.dictionary[roboarm.id].Equals(takenGameObject))
+            {
+                EventAggregator.taskComplete.Publish(taskSo);
+            }
     }
     
 }

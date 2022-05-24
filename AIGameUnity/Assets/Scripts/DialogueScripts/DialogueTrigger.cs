@@ -32,6 +32,11 @@ public class DialogueTrigger : InteractableBase, ITrigger
             //Debug.Log("Can't interact from others"); //todo write on ui that we can't interact
     }
 
+    public override bool CanInteract()
+    {
+        return GameInfo.currentDevice.tag == "Bug";
+    }
+
     /*void End()
     {
         //TODO DELETE IT LATER

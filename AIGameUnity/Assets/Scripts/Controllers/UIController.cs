@@ -143,6 +143,7 @@ public class UIController : MonoBehaviour
     {
         currentOpen = panel;
         panel.SetActive(true);
+        EventAggregator.IntercationAreaExited.Publish(GameInfo.currentDevice);
         GameInfo.currentDevice.GetComponentInChildren<Canvas>(true).gameObject.SetActive(false);
     }
 
