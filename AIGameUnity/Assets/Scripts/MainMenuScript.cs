@@ -11,6 +11,11 @@ public class MainMenuScript : MonoBehaviour
     [SerializeField] GameObject settings;
     //[SerializeField] GameObject continueGame;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+    }
+
 
     public void StartScene(string name)
     {
