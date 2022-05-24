@@ -19,6 +19,7 @@ TagManager:
   - Roboarm
   - Tablet
   - Slope
+  - box
   layers:
   - Default
   - TransparentFX

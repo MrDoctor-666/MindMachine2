@@ -94,7 +94,14 @@ public class InventoryController : MonoBehaviour
                             return;
                         }
                     inventory.dictionary[roboArmScript.id].SetActive(true);
-                    inventory.dictionary[roboArmScript.id].transform.position = hit.collider.bounds.center + new Vector3(0,inventory.dictionary[roboArmScript.id].gameObject.GetComponent<BoxCollider>().bounds.extents.y,0 );
+                    if (hit.collider.CompareTag("box"))
+                    {
+                        inventory.dictionary[roboArmScript.id].transform.position = hit.collider.bounds.center + new Vector3(0, inventory.dictionary[roboArmScript.id].gameObject.GetComponent<BoxCollider>().bounds.extents.y, 0);
+                    }
+                    else
+                    {
+                        inventory.dictionary[roboArmScript.id].transform.position = hit.point;
+                    }
                     inventory.dictionary[roboArmScript.id] = null;
                     EventAggregator.putObjectEvent.Publish();
                     Debug.Log("Кладём вещь на сцену");
