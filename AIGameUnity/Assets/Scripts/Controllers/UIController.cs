@@ -69,6 +69,12 @@ public class UIController : MonoBehaviour
         PowerUI();
     }
 
+    public void OnDisablePlayerInput()
+    {
+        escapeAction.performed -= OnEscape;
+        tabAction.performed -= OnTab;
+    }
+
     private void OnDaysUI(int day)
     {
         daysCanvas.SetActive(true);
