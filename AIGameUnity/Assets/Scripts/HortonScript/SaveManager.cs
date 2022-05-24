@@ -16,6 +16,7 @@ public class MoveableObject
     public float x, y, z, progress;
     public bool isActive;
     public string objectNameInInventory;
+    public string tooltipMessage;
 }
 public class DeviceInfoToSave
 {
@@ -97,6 +98,13 @@ public class SaveManager : MonoBehaviour
                 {
                     configuration.moveableObjects[i].objectNameInInventory = inventory.objectToSaveOnDelivery.name;
                 }
+
+               
+            }
+            if (moveableGameObjects[i].GetComponent<OnClickDevice>())
+            {
+                configuration.moveableObjects[i].tooltipMessage =
+                    moveableGameObjects[i].GetComponent<OnClickDevice>().tooltipMessage;
             }
         }
 
@@ -180,6 +188,13 @@ public class SaveManager : MonoBehaviour
                         inventory.objectToSaveOnDelivery =
                             GameObject.Find(configuration.moveableObjects[i].objectNameInInventory);
                     }
+                   
+                }
+                if (moveableGameObjects[i].GetComponent<OnClickDevice>())
+                {
+                        
+                    moveableGameObjects[i].GetComponent<OnClickDevice>().tooltipMessage =
+                        configuration.moveableObjects[i].tooltipMessage;
                 }
             }
 

@@ -9,7 +9,7 @@ public class InteractableBase : MonoBehaviour, IInteractable
     [SerializeField] private bool isPortable = false;
     [SerializeField] private bool canBePutOn = false;
     [SerializeField] private bool cameraApproach = false;
-    [SerializeField] protected string tooltipMessage = "Interact";
+    [SerializeField] public string tooltipMessage = "Interact";
 
     public bool MultipleUse => multipleUse;
     public bool IsInteractable
