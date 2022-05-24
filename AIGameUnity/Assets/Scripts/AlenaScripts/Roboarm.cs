@@ -228,7 +228,9 @@ public class Roboarm : MonoBehaviour
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.yellow);
             if (Physics.Raycast(ray, out hit, maxInteractDistance, layerMask))
             {
-                if (hit.collider.gameObject.GetComponent<InteractableBase>())
+                if (hit.collider.gameObject.GetComponent<InteractableBase>() &&
+                    hit.collider.gameObject.GetComponent<InteractableBase>().IsInteractable &&
+                    hit.collider.gameObject.GetComponent<InteractableBase>().CanInteract())
                 {
                     hit.collider.gameObject.GetComponent<InteractableBase>().OnInteract();
                 }

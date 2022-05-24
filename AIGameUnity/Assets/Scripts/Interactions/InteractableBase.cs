@@ -33,11 +33,12 @@ public class InteractableBase : MonoBehaviour, IInteractable
         Debug.Log("Interacted: " + name);
         EventAggregator.IntercationAreaExited.Publish(gameObject);
         InteractionData.Reset();
+        if (MultipleUse == false) isInteractable = false;
     }
 
     public void ChangeIfInteractable()
     {
-        isInteractable = !isInteractable;
+        //isInteractable = !isInteractable;
     }
 
     public void SwitchTooltipMessage(string newMessage)
