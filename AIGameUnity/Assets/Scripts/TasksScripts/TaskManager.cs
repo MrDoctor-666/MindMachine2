@@ -60,10 +60,17 @@ public class TaskManager : MonoBehaviour
 
     public void DeleteTask(TaskSO taskSo)
     {
+        print("Зашли в DeleteTask с заданием" + taskSo.name);
         //Пока пусть удаление будет происходить по ID, возможно можно будет просто делать удаление верхнего (pop) элемента, т.к. он активный только
         taskList.Remove(taskSo);
         SortList();
-        ChangeMissionWaypoint(taskList[0]);
+        print("В листе сейчас " + taskList.Count + " Задач после удаления!");
+        if (taskList.Count>0)
+        {
+            
+            ChangeMissionWaypoint(taskList[0]);
+
+        }
         ShowText();
         //todo возможно надо делать сортировку после каждого удаление/добавление, но производительность...
     }

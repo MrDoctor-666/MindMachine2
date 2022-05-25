@@ -20,18 +20,25 @@ public class ColliderTask : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        print("Зашли в OnTriggerEnter");
         if (isAllDevices)
         {
             EventAggregator.taskComplete.Publish(taskSo);   
         }
 
         if (isDeliveryTask)
-        {
-            if (inventory.objectToSaveOnDelivery
-                .Equals(objectToDelivery) && other.CompareTag("DeliveryBot"))
+        { print("Зашли в DelTask");
+            print("проверка инвентарь имя: " + inventory.objectToSaveOnDelivery.name);
+            print("проверка в доставщике предмета имя: " + objectToDelivery.name);
+            print("проверка тега у доставщика: " + other.CompareTag("DeliveryBot"));
+            if (inventory.objectToSaveOnDelivery.name==objectToDelivery.name && other.CompareTag("DeliveryBot"))
             {
+                print("перед таскКомплит");
              EventAggregator.taskComplete.Publish(taskSo);   
              Debug.Log("Доставщик привёз предмет");
+             Debug.Log("Вещь в инвентаре: " + inventory.objectToSaveOnDelivery.name);
+             Debug.Log("Вещь в задании на доставку: " + inventory.objectToSaveOnDelivery.name);
+             Debug.Log("Название задания : " + taskSo.name);
             }
         }
         else

@@ -35,6 +35,7 @@ public class DaysController : MonoBehaviour
     public void NextDay()
     {
         currentDay++;
+        Debug.Log("СЕЙЧАС ДЕНЬ:" + currentDay);
         if (currentDay >= endDay) { EventAggregator.endGame.Publish(Endings.TosterEnding); return; } //throw error or something
         EventAggregator.newDayStarted.Publish(currentDay);
         ObjectStateChange();
@@ -51,6 +52,8 @@ public class DaysController : MonoBehaviour
 
         if (saveManager)
             saveManager.Save();
+        Debug.Log("СЕЙЧАС ДЕНЬ ПОСЛЕ СОХРАНЕНИЯ:" + currentDay);
+        
     }
 
   public  void ObjectStateChange()

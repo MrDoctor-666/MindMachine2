@@ -23,7 +23,7 @@ public class MissionWaypoint : MonoBehaviour
 
     private void Update()
     {
-        if (target.Equals(null))
+        if (target == null)
         {
             img.enabled = false;
             return;
