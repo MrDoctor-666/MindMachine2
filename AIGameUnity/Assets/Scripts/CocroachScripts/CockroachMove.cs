@@ -131,7 +131,7 @@ public class CockroachMove : MonoBehaviour
         Vector3 dir = collision.contacts[0].point - transform.position;
         // We then get the opposite (-Vector3) and normalize it
         dir = -dir.normalized;
-        Debug.Log(dir);
+        //Debug.Log(dir);
         dir.y = 0;
 
         // And finally we add force in the direction of dir and multiply it by force. 

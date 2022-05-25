@@ -14,10 +14,18 @@ public class DialogueTaskComplete : MonoBehaviour
     {
         if (obj.GetComponent<DialogueTrigger>())
         {
+            Debug.Log("CompleteDialogue in DialogueTaskComplete: " + obj);
+            Debug.Log("Ink File: " + obj.GetComponent<DialogueTrigger>().inkFile);
             foreach (var dictionaryTaskInteract in tasksDictionary)
             {
-                if (obj.GetComponent<DialogueTrigger>().inkFile == dictionaryTaskInteract.inkFile)
+                Debug.Log("== in foreach by inkfile " + (obj.GetComponent<DialogueTrigger>().inkFile == dictionaryTaskInteract.inkFile));
+                Debug.Log("== in foreach by name " + (obj.GetComponent<DialogueTrigger>().inkFile.name == dictionaryTaskInteract.inkFile.name));
+                Debug.Log("== in foreach by text " + (obj.GetComponent<DialogueTrigger>().inkFile.text == dictionaryTaskInteract.inkFile.text));
+
+                if (obj.GetComponent<DialogueTrigger>().inkFile.name == dictionaryTaskInteract.inkFile.name ||
+                    obj.GetComponent<DialogueTrigger>().inkFile == dictionaryTaskInteract.inkFile)
                 {
+                    Debug.Log("Dialogue Task Complete Published");
                     EventAggregator.taskComplete.Publish(dictionaryTaskInteract.taskSo);
                     //todo надо ли удалять задания из списка?
                 }

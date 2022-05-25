@@ -20,8 +20,8 @@ public class Door : MonoBehaviour
             button.AssignUsedObject(Use);
 
         AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
-        foreach (AnimationClip clip in clips)
-            Debug.Log(clip.name + clip.length);
+        /*foreach (AnimationClip clip in clips)
+            Debug.Log(clip.name + clip.length);*/
         animTime = clips[0].length;
 
     }
