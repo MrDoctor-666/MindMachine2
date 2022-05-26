@@ -90,6 +90,7 @@ public class UIController : MonoBehaviour
     {
         if (currentOpen != null /*&& currentOpen != dialoguePanel*/)
         {
+            if (currentOpen == dialoguePanel) EventAggregator.DialogueEnded.Publish();
             EventAggregator.PanelClosed.Publish();
             SettingsMenu.SetActive(false);
         }
