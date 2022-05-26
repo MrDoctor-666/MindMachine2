@@ -24,6 +24,7 @@ public class MenuScript: MonoBehaviour
     {
         EventAggregator.Reset();
         GameInfo.Reset();
+        UICont.OnDisablePlayerInput();
         SceneManager.LoadScene("MainMenuScene");
     }
     

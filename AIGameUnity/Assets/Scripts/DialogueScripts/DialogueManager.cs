@@ -35,6 +35,7 @@ public class DialogueManager : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
 
         EventAggregator.DialogueStarted.Subscribe(StartDialogue);
+        EventAggregator.DialogueEnded.Subscribe(Reset);
 
         nextLineAction = playerInput.currentActionMap.FindAction("NextDialogueLine");
         nextLineAction.performed += OnNextPressed;
@@ -208,6 +209,8 @@ public class DialogueManager : MonoBehaviour
 
     private void Reset()
     {
+        Debug.Log("Reset Dialogue");
+        isInMonologue = false;
         inkFile = null;
         story = null;
         tags = null;
