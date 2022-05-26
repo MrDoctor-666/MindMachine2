@@ -49,6 +49,7 @@ public class InventoryController : MonoBehaviour
                     EventAggregator.takenObject.Publish();
                     //публикация взятия объекта для задания
                     EventAggregator.getObjectEvent.Publish();
+                    roboArmScript.isArmEmpty = false;
                     Debug.Log("Взяли объект");
                 }
 
@@ -63,6 +64,7 @@ public class InventoryController : MonoBehaviour
                         inventory.dictionary[roboArmScript.id] = inventory.objectToSaveOnDelivery;
                         inventory.objectToSaveOnDelivery = null;
                         EventAggregator.getObjectEvent.Publish();
+                        roboArmScript.isArmEmpty = false;
                         Debug.Log("Забрали вещь из доставщика");
                     }
                 }
@@ -76,6 +78,7 @@ public class InventoryController : MonoBehaviour
                         inventory.objectToSaveOnDelivery = inventory.dictionary[roboArmScript.id];
                         inventory.dictionary[roboArmScript.id] = null;
                         EventAggregator.putObjectEvent.Publish();
+                        roboArmScript.isArmEmpty = true;
                         Debug.Log("Кладём объект в доставщика");
                     }
                 }
@@ -104,6 +107,7 @@ public class InventoryController : MonoBehaviour
                     }
                     inventory.dictionary[roboArmScript.id] = null;
                     EventAggregator.putObjectEvent.Publish();
+                    roboArmScript.isArmEmpty = true;
                     Debug.Log("Кладём вещь на сцену");
                 }
             }

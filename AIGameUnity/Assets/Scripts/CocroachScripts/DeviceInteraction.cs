@@ -61,6 +61,7 @@ public class DeviceInteraction : MonoBehaviour
         layerMask1 = layerMask1 | layerMask2;
         layerMask1 = ~layerMask1;
         Camera cam = GetComponentInChildren<Camera>();
+        Roboarm roboarm = gameObject.GetComponent<Roboarm>();
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * 100f, Color.yellow);
@@ -69,7 +70,7 @@ public class DeviceInteraction : MonoBehaviour
         {
             InteractableBase interact = hit.transform.GetComponent<InteractableBase>();
             //null or outside of any interaction range
-            if (interact == null || hit.distance > interact.InteractionRadius)
+            if (interact == null || hit.distance > interact.InteractionRadius || (interact.CanBePutOn && roboarm.isArmEmpty))
             {
                 //if before we were in the interaction range
                 if (InteractionData.interactionObj != null)
@@ -82,7 +83,7 @@ public class DeviceInteraction : MonoBehaviour
             //if it's the same object as last time
             if (interact == InteractionData.interactionObj) return;
             //if we're in range of interactable object and it's the first time
-            if (interact.IsInteractable && interact.CanInteract())
+            if (interact.IsInteractable && interact.CanInteract() || (interact.CanBePutOn && !roboarm.isArmEmpty))
             {
                 //show ui
                 InteractionData.interactionObj = interact;
