@@ -70,7 +70,7 @@ public class DeviceInteraction : MonoBehaviour
         {
             InteractableBase interact = hit.transform.GetComponent<InteractableBase>();
             //null or outside of any interaction range
-            if (interact == null || hit.distance > interact.InteractionRadius || (interact.CanBePutOn && roboarm.isArmEmpty))
+            if (interact == null || hit.distance > interact.InteractionRadius || (interact.CanBePutOn && roboarm.isArmEmpty && !hit.collider.CompareTag("box")))
             {
                 //if before we were in the interaction range
                 if (InteractionData.interactionObj != null)
