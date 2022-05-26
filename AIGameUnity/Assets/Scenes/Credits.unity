@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -150,7 +150,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1735396558458269397, guid: 719317e6660705446abfb487e0736712, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 4f7b22e49194e3847812a354d5b4f751, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 47eb40dcd503cc14a8844e00fe694199, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -375,7 +375,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '***'
+  m_text: '
+
+    ***'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f901947f85f523f498a2646798d5f795, type: 2}
   m_sharedMaterial: {fileID: 101242327317970030, guid: f901947f85f523f498a2646798d5f795, type: 2}
@@ -1149,7 +1151,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0412 \u043F\u0440\u043E\u0446\u0435\u0441\u0441\u0435 \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0438:\n-
+  m_text: "\n\u0412 \u043F\u0440\u043E\u0446\u0435\u0441\u0441\u0435 \u0440\u0430\u0437\u0440\u0430\u0431\u043E\u0442\u043A\u0438:\n-
     \u0422\u0440\u0438 \u0433\u0438\u0442-\u0440\u0435\u043F\u043E\u0437\u0438\u0442\u043E\u0440\u0438\u044F
     \u0432\u044B\u0441\u043A\u0430\u0437\u0430\u043B\u0438 \u0441\u0432\u043E\u0435
     \u043C\u043D\u0435\u043D\u0438\u0435 \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E
