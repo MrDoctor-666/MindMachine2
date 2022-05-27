@@ -64,8 +64,9 @@ public class EventAggregator
 
     //elevator
     public static EventNoParam liftMovingEvent = new EventNoParam();
-   
+
     //tasks
+    public static EventNoParam taskCompleteSound = new EventNoParam();
     public static EventOneParam<TaskSO> taskComplete = new EventOneParam<TaskSO>();
     public static EventOneParam<TaskSO> deleteFromTaskBank = new EventOneParam<TaskSO>();
     public static EventOneParam<int> taskListAdd = new EventOneParam<int>();

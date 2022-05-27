@@ -45,6 +45,7 @@ public class SoundController : MonoBehaviour
     [SerializeField] private AudioClip elevator; //liftMovingEvent
     [SerializeField] private AudioClip buttonOnScene; //sceneButtonEvent
     [SerializeField] private AudioClip doorsOnScene; //sceneDoorsEvent
+    [SerializeField] private AudioClip taskComplete;//taskCompleteSound
 
     [Header("Puzzle")]
     [SerializeField] private AudioClip startPuzzle; //puzzleStarted
@@ -108,8 +109,8 @@ public class SoundController : MonoBehaviour
         EventAggregator.toasterEvent.Subscribe(OnToasterSwitch);
         EventAggregator.liftMovingEvent.Subscribe(OnElevator);
         EventAggregator.sceneDoorsEvent.Subscribe(OnDoors);
+        EventAggregator.taskCompleteSound.Subscribe(OnTaskComplete);
         EventAggregator.sceneButtonEvent.Subscribe(OnButton);
-
 
         EventAggregator.puzzleStarted.Subscribe(OnPuzzleStarted);
         EventAggregator.puzzleEnded.Subscribe(OnPuzzleEnded);
@@ -372,5 +373,10 @@ public class SoundController : MonoBehaviour
     private void OnClickButtonUI()
     {
         Revise(clickButtonUI, effects);
+    }
+
+    private void OnTaskComplete()
+    {
+        Revise(taskComplete, effects);
     }
 }
