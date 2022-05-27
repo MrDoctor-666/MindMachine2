@@ -315,12 +315,12 @@ public class SoundController : MonoBehaviour
     {
 
         main.TransitionTo(0);
+        Revise(startPuzzle, effects);
 
         puzzleBackground.clip = puzzleScene;
         puzzleBackground.Play();
         livingRoomBackground.Stop();
         engineRoomBackground.Stop();
-        Revise(startPuzzle, effects);
     }
 
 
