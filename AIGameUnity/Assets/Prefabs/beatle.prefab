@@ -109,7 +109,7 @@ RectTransform:
   - {fileID: 6214940427316200605}
   - {fileID: 8135414404710370778}
   m_Father: {fileID: 7540258456194150314}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -502,6 +502,8 @@ GameObject:
   - component: {fileID: 4497555801267632651}
   - component: {fileID: 4497555801267632692}
   - component: {fileID: 5249923292160049512}
+  - component: {fileID: 8504841594768054663}
+  - component: {fileID: 5457055975510096607}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -663,65 +665,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0deff8f74ca097b419572da0f2e03a78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4497555802265423741
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4497555802265423740}
-  - component: {fileID: 4497555802265423730}
-  - component: {fileID: 4497555802265423731}
-  m_Layer: 0
-  m_Name: Upgrade2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4497555802265423740
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4497555802265423741}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.009999997, y: 0.003709999, z: 0.011245997}
-  m_Children: []
-  m_Father: {fileID: 7540258456194150314}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4497555802265423730
+  xClamp: 85
+--- !u!114 &8504841594768054663
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4497555802265423741}
+  m_GameObject: {fileID: 4497555801267632694}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10df272af08d59243ba43123bf8e57fc, type: 3}
+  m_Script: {fileID: 11500000, guid: dfc94c5fff7824d42afedf75e6891b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 20
-  isGrounded: 0
---- !u!65 &4497555802265423731
-BoxCollider:
+  nameToDisplay: 
+  isActive: 0
+  isBlocked: 0
+  cost: 0
+  everyDayPrize: 0
+  compPowerAlgorithm: 0
+  suspicionSabotage: 0
+--- !u!114 &5457055975510096607
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4497555802265423741}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_GameObject: {fileID: 4497555801267632694}
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.512979, y: 0.05338744, z: 4.873484}
-  m_Center: {x: 0.14638905, y: -0.009237182, z: -0.39006445}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: 0}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: 
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &4555331580416749472
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,6 +804,7 @@ GameObject:
   - component: {fileID: 4497555802254880998}
   - component: {fileID: 4497555802254881000}
   - component: {fileID: 4497555802254881005}
+  - component: {fileID: 1005175851828954852}
   - component: {fileID: 4497555802254881004}
   - component: {fileID: 4497555802254880995}
   - component: {fileID: 4497555802254880994}
@@ -835,7 +829,6 @@ Transform:
   m_Children:
   - {fileID: 4497555801267632693}
   - {fileID: 4497555800935163330}
-  - {fileID: 4497555802265423740}
   - {fileID: 3286333058681072324}
   - {fileID: 7186170235503345081}
   m_Father: {fileID: 0}
@@ -910,11 +903,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7170394182402014db030cc91d6943f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInput: {fileID: 4497555802254881000}
   movementSpeed: 2
-  mouseSensitivityX: 20
-  mouseSensitivityY: 1
-  xClamp: 30
+  gravity: 20
+  jumpSpeed: 8
+--- !u!114 &1005175851828954852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7201169703872902416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0deff8f74ca097b419572da0f2e03a78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xClamp: 85
 --- !u!114 &4497555802254881004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -934,6 +938,8 @@ MonoBehaviour:
   canBePutOn: 0
   cameraApproach: 0
   tooltipMessage: Interact
+  messageIfUnlocked: 
+  messageIfBlocked: 
 --- !u!114 &4497555802254880995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -950,10 +956,9 @@ MonoBehaviour:
   isActive: 0
   isBlocked: 0
   cost: 0
-  prizeSabotge: 0
   everyDayPrize: 0
+  compPowerAlgorithm: 0
   suspicionSabotage: 0
-  minusSuspitionAlgorithm: 0
 --- !u!114 &4497555802254880994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,7 +1000,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6255190033481795713, guid: d3bb414e19d723c4698aaf2a1051a913, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6255190033481795713, guid: d3bb414e19d723c4698aaf2a1051a913, type: 3}
       propertyPath: m_LocalPosition.x

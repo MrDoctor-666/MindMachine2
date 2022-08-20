@@ -42,7 +42,7 @@ public class DeviceController : MonoBehaviour
         currentDevice.GetComponent<DeviceInfo>().isActive = true;
         currentDevice.GetComponentInChildren<AudioListener>().enabled = true;
         currentDevice.GetComponentInChildren<Camera>().enabled = true;
-        if (currentDevice.tag == "Bug") currentDevice.GetComponent<Rigidbody>().freezeRotation = true;
+        //if (currentDevice.tag == "Bug") currentDevice.GetComponent<Rigidbody>().freezeRotation = true;
         EventAggregator.DeviceSwitched.Publish(GameInfo.currentDevice);
     }
 
@@ -56,8 +56,8 @@ public class DeviceController : MonoBehaviour
         currentDevice.GetComponentInChildren<AudioListener>().enabled = false;
         device.GetComponent<DeviceInfo>().isActive = true;
         device.GetComponentInChildren<AudioListener>().enabled = true;
-        if (currentDevice.tag == "Bug") currentDevice.GetComponent<Rigidbody>().freezeRotation = false;
-        if (device.tag == "Bug") device.GetComponent<Rigidbody>().freezeRotation = true;
+        //if (currentDevice.tag == "Bug") currentDevice.GetComponent<Rigidbody>().freezeRotation = false;
+        //if (device.tag == "Bug") device.GetComponent<Rigidbody>().freezeRotation = true;
         //canvases
         if (device.GetComponentInChildren<Canvas>(true)) device.GetComponentInChildren<Canvas>(true).gameObject.SetActive(true);
         if (currentDevice.GetComponentInChildren<Canvas>(true)) currentDevice.GetComponentInChildren<Canvas>(true).gameObject.SetActive(false);

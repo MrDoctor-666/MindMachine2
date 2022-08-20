@@ -6,13 +6,13 @@ using UnityEngine.InputSystem;
 public class CockroachJumpUpgrate : MonoBehaviour
 {
     [SerializeField] float jumpForce = 5f;
-    Rigidbody rb;
+    //Rigidbody rb;
     PlayerInput playerInput;
     InputAction jumpAction;
     public bool isGrounded;
     private void OnEnable()
     {
-        rb = transform.parent.GetComponent<Rigidbody>();
+        //rb = transform.parent.GetComponent<Rigidbody>();
         playerInput = transform.parent.GetComponent<PlayerInput>();
         jumpAction = playerInput.currentActionMap.FindAction("Jump");
 
@@ -28,7 +28,7 @@ public class CockroachJumpUpgrate : MonoBehaviour
         {
             //EventAggregator.endMoving.Publish(transform.parent.gameObject);
             EventAggregator.cockroachJump.Publish();
-            rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            //rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
             isGrounded = false;
         }
     }
