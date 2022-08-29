@@ -89,9 +89,14 @@ public class CockroachMove : MonoBehaviour
                     jump = false;
                 }
             }
+            move.y -= gravity * Time.deltaTime;
+            chController.Move(transform.rotation * move * Time.deltaTime);
         }
-        move.y -= gravity * Time.deltaTime;
-        chController.Move(transform.rotation * move * Time.deltaTime);
+        else if (!chController.isGrounded)
+        {
+            move = new Vector3(0, -gravity * Time.deltaTime, 0);
+            chController.Move(transform.rotation * move * Time.deltaTime);
+        }
     }
 
     void CheckAnimation()
