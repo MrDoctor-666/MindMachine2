@@ -9,24 +9,29 @@ public class DeliveryMove : MonoBehaviour
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float movementSpeed;
+    [SerializeField] private float gravity = 20f;
     [SerializeField] public int drag;
     [SerializeField] public bool isWithPlane;
 
     private DeviceInfo deviceInfoScript;
+    private CharacterController chController;
+    private DeviceInteraction deviceInteraction;
+    private OnClickDevice onClickDevice;
 
     private InputAction moveInputAction;
     private InputAction takeInputAction;
     private InputAction deliveryInputAction;
     private InputAction planeInputAction;
 
-
     private Vector2 moveCommand;
 
-    private DeviceInteraction deviceInteraction;
-    private OnClickDevice onClickDevice;
+    BoxCollider collider;
     private bool isMoving = false;
+    private Vector3 move = Vector3.zero;
+    private float initialGravity;
+    private Vector3 fPoint, bPoint;
 
-    [Header("Slope Handling")]
+     [Header("Slope Handling")]
     [SerializeField] float backToNormalSpeed = 0.5f;
     float time = 0.0f;
     Quaternion endRotation, initialRotation;
@@ -35,8 +40,12 @@ public class DeliveryMove : MonoBehaviour
 
     private void Awake()
     {
+        initialGravity = gravity;
+
         deviceInfoScript = gameObject.GetComponent<DeviceInfo>();
         onClickDevice = gameObject.GetComponent<OnClickDevice>();
+        chController = GetComponent<CharacterController>();
+
         //playerInput.onActionTriggered += OnPlayerInputActionTriggered;
         moveInputAction = playerInput.currentActionMap.FindAction("Move");
         takeInputAction = playerInput.currentActionMap.FindAction("Take");
@@ -54,9 +63,7 @@ public class DeliveryMove : MonoBehaviour
         planeInputAction.performed += OnPlane;
         planeInputAction.canceled += OnPlane;
 
-        Vector3 sizeVec = GetComponent<Collider>().bounds.size;
-        gameObject.GetComponent<Rigidbody>().centerOfMass = new Vector3(0, -sizeVec.y / 2, 0);
-        gameObject.GetComponent<Rigidbody>().freezeRotation = true;
+        collider = GetComponent<BoxCollider>();
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -107,16 +114,11 @@ public class DeliveryMove : MonoBehaviour
         {
             InteractableBase interact = InteractionData.interactionObj;
             if (interact != null)
-            {
                 interact.OnInteract();
-                //if (interact.MultipleUse == false) interact.ChangeIfInteractable();
-            }
         }
     }
 
-    private void OnDelivery(InputAction.CallbackContext context)
-    {
-    }
+    private void OnDelivery(InputAction.CallbackContext context) { }
 
     private void OnPlane(InputAction.CallbackContext context)
     {   
@@ -124,13 +126,12 @@ public class DeliveryMove : MonoBehaviour
         {
             if (planeInputAction.phase == InputActionPhase.Performed)
             {
-                gameObject.GetComponent<Rigidbody>().drag = drag;
-
+                gravity = 5f;
             }
 
             if (planeInputAction.phase == InputActionPhase.Canceled)
             {
-                gameObject.GetComponent<Rigidbody>().drag = 0;
+                gravity = initialGravity;
             } 
         }
     }
@@ -140,19 +141,52 @@ public class DeliveryMove : MonoBehaviour
         if (deviceInfoScript.isActive)
         {
             transform.rotation *= Quaternion.AngleAxis(Time.deltaTime * rotationSpeed * moveCommand.x, Vector3.up);
-            transform.position += transform.forward * movementSpeed * moveCommand.y * Time.deltaTime;
+            //transform.position += transform.forward * movementSpeed * moveCommand.y * Time.deltaTime;
             //todo
            // Cursor.lockState = CursorLockMode.Locked;
             deviceInteraction.CheckForInteractionWithRayCastWithCursor(onClickDevice.InteractionRadius, 6, 9);
 
+            if (chController.isGrounded)
+            {
+                //move wasd
+                move = new Vector3(0, 0, moveCommand.y);
+                move *= movementSpeed;
+            }
+            move.y -= gravity * Time.deltaTime;
+            chController.Move(transform.rotation * move * Time.deltaTime);
+
+            RotateToGround();
+        }
+        else if (!chController.isGrounded)
+        {
+            move = new Vector3(0, -gravity * Time.deltaTime, 0);
+            chController.Move(transform.rotation * move * Time.deltaTime);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void RotateToGround()
+    {
+        float dist = 5f;
+        Vector3 dir = -transform.up;
+        RaycastHit hit, hit2;
+        fPoint = transform.TransformPoint(collider.center + new Vector3(0, -collider.size.y / 2, collider.size.z / 2));
+        bPoint = transform.TransformPoint(collider.center + new Vector3(0, -collider.size.y / 2, -collider.size.z / 2));
+
+        Debug.DrawRay(fPoint, dir, Color.red);
+        Debug.DrawRay(bPoint, dir, Color.red);
+
+        if (Physics.Raycast(fPoint, dir, out hit, dist) && Physics.Raycast(bPoint, dir, out hit2, dist))
+        {
+            Vector3 upright = Vector3.Cross(transform.right, -(hit.point - hit2.point).normalized);
+            transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, upright));
+        }
+    }
+
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Slope")
         {
-            gameObject.GetComponent<Rigidbody>().freezeRotation = false;
+            //gameObject.GetComponent<Rigidbody>().freezeRotation = false;
             if (curCoroutine != null) StopCoroutine(curCoroutine);
             curCoroutine = null;
         }
@@ -162,7 +196,7 @@ public class DeliveryMove : MonoBehaviour
     {
         if (other.tag == "Slope" && gameObject.GetComponent<Rigidbody>().freezeRotation == true)
         {
-            gameObject.GetComponent<Rigidbody>().freezeRotation = false;
+            //gameObject.GetComponent<Rigidbody>().freezeRotation = false;
             if (curCoroutine != null) StopCoroutine(curCoroutine);
             curCoroutine = null;
         }
@@ -172,7 +206,7 @@ public class DeliveryMove : MonoBehaviour
     {
         if (other.tag == "Slope")
         {
-            gameObject.GetComponent<Rigidbody>().freezeRotation = true;
+            //gameObject.GetComponent<Rigidbody>().freezeRotation = true;
             //transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
             if (curCoroutine != null) StopCoroutine(curCoroutine);
             curCoroutine = rotateSlowly();
@@ -195,5 +229,5 @@ public class DeliveryMove : MonoBehaviour
 
         transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
 
-    }
+    }*/
 }
