@@ -107,10 +107,12 @@ public class Roboarm : MonoBehaviour
         if (deviceInfo.isActive && cam.GetComponent<CameraRoboarm>().beReady)
         {
             float duration = 1 / speed;
+            float cameraRotation = cam.transform.rotation.y;
+            float a = -2 * cameraRotation + 1;
 
             if (moveCommand.y > 0)
             {
-                progress += (Time.deltaTime * moveCommand.y / duration);
+                progress += (a * Time.deltaTime * moveCommand.y / duration);
                 if (progress > 1f) //the last point of curve
                 {
                     if (mode == SplineWalkerMode.Once)
@@ -125,7 +127,7 @@ public class Roboarm : MonoBehaviour
             }
             else if (moveCommand.y < 0)
             {
-                progress += (Time.deltaTime * moveCommand.y / duration);
+                progress += (a * Time.deltaTime * moveCommand.y / duration);
                 if (progress < 0f)
                 {
                     progress = -progress;
