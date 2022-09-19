@@ -51,7 +51,6 @@ public class DevicesSummon : MonoBehaviour
         //get cockroach device
         if (cockroach == null) FindCockroach();
         if (cockroach == null) return;
-        cockroach.GetComponent<Rigidbody>().isKinematic = false;
         Vector3 sizeVec = cockroach.gameObject.GetComponent<Collider>().bounds.size;
         //get destination position
         Debug.Log(cockroachSummonPlace.transform.position);
@@ -63,7 +62,6 @@ public class DevicesSummon : MonoBehaviour
         //move device
         cockroach.gameObject.transform.position = destPosition;
         cockroach.gameObject.transform.localEulerAngles = Vector3.zero;
-        StartCoroutine(Land(cockroach));
         EventAggregator.PanelClosed.Publish();
 
         //wtf why is it here??
@@ -78,12 +76,6 @@ public class DevicesSummon : MonoBehaviour
                 cockroach = device;
                 break;
             }
-    }
-
-    IEnumerator Land(DeviceInfo cockroach)
-    {
-        yield return new WaitForSeconds(1);
-        cockroach.GetComponent<Rigidbody>().isKinematic = true;
     }
 
     public void SummonDelivery()
