@@ -107,7 +107,7 @@ public class Roboarm : MonoBehaviour
         if (deviceInfo.isActive && cam.GetComponent<CameraRoboarm>().beReady)
         {
             float duration = 1 / speed;
-            float cameraRotation = cam.transform.rotation.y;
+            float cameraRotation = cam.transform.localRotation.y;
             float a = -2 * cameraRotation + 1;
 
             if (moveCommand.y > 0)
