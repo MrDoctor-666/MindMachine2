@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 public class CockroachRotation : MonoBehaviour
 {
     [Header("Camera Rotation Settings")]
-    public static float mouseSensitivityX = 0.4f;
-    public static float mouseSensitivityY = 0.4f;
+    public static float mouseSensitivityX = 0.5f;
+    public static float mouseSensitivityY = 0.5f;
     [SerializeField] private float xClamp = 85f;
 
     private PlayerInput playerInput;

@@ -161,12 +161,13 @@ public class DeliveryMove : MonoBehaviour
         {
             move = new Vector3(0, -gravity * Time.deltaTime, 0);
             chController.Move(transform.rotation * move * Time.deltaTime);
+            //RotateToGround();
         }
     }
 
     private void RotateToGround()
     {
-        float dist = 5f;
+        float dist = 3f;
         Vector3 dir = -transform.up;
         RaycastHit hit, hit2;
         fPoint = transform.TransformPoint(collider.center + new Vector3(0, -collider.size.y / 2, collider.size.z / 2));
