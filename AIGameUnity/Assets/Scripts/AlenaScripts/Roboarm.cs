@@ -81,7 +81,6 @@ public class Roboarm : MonoBehaviour
         if (deviceInfo.isActive)
         {   
             CurveDriving();
-            CameraRotation();
 
             if (buttonChangeWay)
             {
@@ -93,6 +92,11 @@ public class Roboarm : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             deviceInteraction.CheckForInteractionWithRayCast(maxInteractDistance, 8, 9);
         }
+    }
+
+    private void FixedUpdate()
+    {
+            CameraRotation();
     }
 
     private void CameraRotation()
