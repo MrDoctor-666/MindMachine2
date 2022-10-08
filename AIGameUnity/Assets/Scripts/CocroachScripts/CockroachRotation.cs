@@ -49,7 +49,7 @@ public class CockroachRotation : MonoBehaviour
         else mouseInput.y = 0;
     }
 
-    private void LateUpdate()
+    public void Rotate()
     {
         if (cockroachInfo.isActive)
         {

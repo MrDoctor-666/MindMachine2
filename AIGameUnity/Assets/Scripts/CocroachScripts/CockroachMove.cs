@@ -14,6 +14,7 @@ public class CockroachMove : MonoBehaviour
     private DeviceInteraction deviceInteraction;
     private OnClickDevice onClickDevice;
     private InputAction moveActoin, takeInputAction, jumpAction;
+    private CockroachRotation rotation;
 
     private Vector2 moveCommand;
     private Vector3 move = Vector3.zero;
@@ -27,6 +28,7 @@ public class CockroachMove : MonoBehaviour
         onClickDevice = gameObject.GetComponent<OnClickDevice>();
         chController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
+        rotation = GetComponent<CockroachRotation>();
 
         moveActoin = playerInput.currentActionMap.FindAction("Move");
         takeInputAction = playerInput.currentActionMap.FindAction("Take");
@@ -97,6 +99,7 @@ public class CockroachMove : MonoBehaviour
             move = new Vector3(0, -gravity * Time.deltaTime, 0);
             chController.Move(transform.rotation * move * Time.deltaTime);
         }
+        rotation.Rotate();
     }
 
     void CheckAnimation()
