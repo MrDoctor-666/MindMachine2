@@ -9,8 +9,8 @@ public class Roboarm : MonoBehaviour
 {
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private Camera cam;
-    public static float mouseSensitivityX = 3f;
-    public static float mouseSensitivityY = 0.2f;
+    public static float mouseSensitivityX = 0.5f;
+    public static float mouseSensitivityY = 0.5f;
     [SerializeField] private float xClamp = 85f;
     [HideInInspector] public GameObject objectToSave;
     [HideInInspector] public bool buttonChangeWay = false;
@@ -30,6 +30,7 @@ public class Roboarm : MonoBehaviour
     private InputAction changeWayInputAction;
     private InputAction takeObjectOnSceneInputAction;
     private float xRotation = 0f;
+    private float yRotation = 0f;
 
     [Header ("Spline")]
     [SerializeField] public BezierSpline spline;
@@ -96,13 +97,14 @@ public class Roboarm : MonoBehaviour
 
     private void FixedUpdate()
     {
-            CameraRotation();
+        CameraRotation();
     }
 
     private void CameraRotation()
     {
         Vector3 rotY = cam.transform.localEulerAngles;
         rotY.x = xRotation;
+        rotY.y = yRotation;
         cam.transform.localEulerAngles = rotY;
     }
 
@@ -248,10 +250,12 @@ public class Roboarm : MonoBehaviour
     {
         if (deviceInfo.isActive)
         {
-            mouseInput.x = context.action.ReadValue<float>();
+            mouseInput.x = -context.action.ReadValue<float>();
             mouseInput.x *= mouseSensitivityX;
 
-            cam.transform.Rotate(Vector3.up * mouseInput.x * Time.deltaTime * mouseSensitivityX, Space.World);
+            yRotation -= mouseInput.x;
+            yRotation = Mathf.Clamp(yRotation, -180, 180);
+            cam.transform.localEulerAngles = new Vector3(cam.transform.localEulerAngles.x, yRotation, cam.transform.localEulerAngles.z);
         }
     }
     
@@ -267,36 +271,4 @@ public class Roboarm : MonoBehaviour
             cam.transform.localEulerAngles = new Vector3(xRotation, cam.transform.localEulerAngles.y, cam.transform.localEulerAngles.z);
         }
     } 
-    
-    /*private void OnDelivery(InputAction.CallbackContext context)
-    {
-
-        Debug.Log("Delivery action");
-        Ray ray = GetComponentInChildren<Camera>().ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-        RaycastHit hit;
-        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.yellow);
-        if (Physics.Raycast(ray, out hit, maxInteractDistance))
-        {
-            InteractableBase interact = hit.transform.GetComponent<InteractableBase>();
-            if (interact == null) return;
-            if (isEmpty && (interact.IsPortable == true))
-            {
-                objectToSave = hit.collider.gameObject;
-                objectToSave.SetActive(false);
-                isEmpty = false;
-                Debug.Log("IsTaken");
-            }
-            else if ((isEmpty==false) && (interact.CanBePutOn == true))
-            {
-                if (objectToSave == null)
-                {
-                    return;
-                }
-                objectToSave.transform.position = hit.point;
-                objectToSave.SetActive(true);
-                isEmpty = true;
-                Debug.Log("Done");
-            }
-        }
-    }*/
 }
