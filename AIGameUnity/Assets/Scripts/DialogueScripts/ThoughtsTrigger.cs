@@ -30,7 +30,7 @@ public class ThoughtsTrigger : MonoBehaviour, ITrigger
 
     private void StartThoughts(Collider other)
     {
-        if (other.gameObject == GameInfo.currentDevice)
+        if (other.gameObject == GameInfo.currentDevice && !isThisInProgress)
         {
             isThisInProgress = true;
             GetComponent<BoxCollider>().enabled = false;
