@@ -31,8 +31,9 @@ public class CockroachRotation : MonoBehaviour
     {
         if (cockroachInfo.isActive)
         {
-            mouseInput.x = context.action.ReadValue<float>();
-            mouseInput.x *= mouseSensitivityX;
+            mouseInput.x += context.action.ReadValue<float>() * mouseSensitivityX;
+            //mouseInput.x *= mouseSensitivityX;
+            Debug.Log(mouseInput.x);
         }
         else mouseInput.x = 0;
     }
@@ -55,6 +56,8 @@ public class CockroachRotation : MonoBehaviour
         {
             //camera mouse x
             transform.Rotate(Vector3.up, mouseInput.x); //rotation
+            mouseInput.x = 0;
+            //Debug.Log(transform.rotation);
             //camera mouse y
             Camera mycam = GetComponentInChildren<Camera>();
             Vector3 targetRotation = mycam.transform.eulerAngles;
