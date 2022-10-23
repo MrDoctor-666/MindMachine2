@@ -22,11 +22,11 @@ public class SettingsUI : MonoBehaviour
     public void ChangeSensitivityX(float sense)
     {
         CockroachRotation.mouseSensitivityX = 0.05f+sense*0.6f;
-        Roboarm.mouseSensitivityX = 0.2f+sense*2.1f;
+        Roboarm.mouseSensitivityX = 0.05f + sense * 0.6f;
     }
     public void ChangeSensitivityY(float sense)
     {
-        CockroachRotation.mouseSensitivityY = 0.02f+sense*0.6f;
-        Roboarm.mouseSensitivityY = 0.01f+sense*0.235f;
+        CockroachRotation.mouseSensitivityY = 0.05f+sense*0.6f;
+        Roboarm.mouseSensitivityY = 0.05f + sense * 0.6f;
     }
 }
