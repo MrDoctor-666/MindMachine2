@@ -75,6 +75,8 @@ public class Roboarm : MonoBehaviour
 
         splinesOfRails = new BezierSpline[2];
         maxInteractDistance = onClickDevice.InteractionRadius;
+
+        mouseInput.x = 0;
     }
 
     private void Update()
@@ -114,7 +116,8 @@ public class Roboarm : MonoBehaviour
         {
             float duration = 1 / speed;
             float cameraRotation = cam.transform.localRotation.y;
-            float a = -2 * cameraRotation + 1;
+            cameraRotation *= cameraRotation;
+            float a = -1.961f * (cameraRotation) + 0.961f;
 
             if (moveCommand.y > 0)
             {
@@ -194,6 +197,7 @@ public class Roboarm : MonoBehaviour
     private void OnChangeWay(InputAction.CallbackContext context)
     {
         ChangeWay();
+        mouseInput.x = 0;
     }
 
     private void ChangeWay()
@@ -250,11 +254,10 @@ public class Roboarm : MonoBehaviour
     {
         if (deviceInfo.isActive)
         {
-            mouseInput.x = -context.action.ReadValue<float>();
+            mouseInput.x -= context.action.ReadValue<float>();
             mouseInput.x *= mouseSensitivityX;
 
             yRotation -= mouseInput.x;
-            yRotation = Mathf.Clamp(yRotation, -180, 180);
             cam.transform.localEulerAngles = new Vector3(cam.transform.localEulerAngles.x, yRotation, cam.transform.localEulerAngles.z);
         }
     }
