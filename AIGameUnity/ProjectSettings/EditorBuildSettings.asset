@@ -14,9 +14,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/GD_alpha2ndScene.unity
     guid: 5cdee12a766321b479e81b766866f610
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/New Scene.unity
     guid: dd50756bbaff1bd43846991ad00993a3
+  - enabled: 1
+    path: Assets/Scenes/Testing 2nd loc.unity
+    guid: bfc39c727efc4cf41a221a27e89af2e1
   - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 7532348b69339d74bb9dffc968eb3c42
