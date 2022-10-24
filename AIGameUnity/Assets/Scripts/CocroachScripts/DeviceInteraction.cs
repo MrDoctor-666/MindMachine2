@@ -132,7 +132,7 @@ public class DeviceInteraction : MonoBehaviour
             //if it's the same object as last time
             if (interact == InteractionData.interactionObj) return;
             //if we're in range of interactable object and it's the first time
-            if (interact.IsInteractable)
+            if (interact.IsInteractable && interact.CanInteract())
             {
                 if (interact.CanBePutOn)
                 {
