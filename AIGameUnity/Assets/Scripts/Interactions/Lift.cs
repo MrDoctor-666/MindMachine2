@@ -14,6 +14,7 @@ public class Lift : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
+        if (other.GetType() != typeof(CharacterController)) return;
         if (isTeleportedTo || startedTeleporting) return;
         device = GameInfo.currentDevice;
         if (device.tag != "DeliveryBot") return; //can add ui or something
@@ -38,21 +39,24 @@ public class Lift : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         isTeleportedTo = false;
+        Debug.Log("Lift exit");
     }
 
     IEnumerator Teleport()
     {
         startedTeleporting = true;
         Vector3 destPosition = destination.transform.position;
-        destPosition.y += device.transform.localScale.y/2; //half of the deliveryBot high
+        //destPosition.y += device.transform.localScale.y/4; //half of the deliveryBot high
         device.GetComponent<DeviceInfo>().isActive = false;
         yield return new WaitForSeconds(teleportationTime);
 
         destination.GetComponentInChildren<Lift>().isTeleportedTo = true;
+        device.GetComponent<CharacterController>().enabled = false;
         device.transform.position = destPosition;
-        device.GetComponent<DeviceInfo>().isActive = true;
         device.transform.eulerAngles = new Vector3(0, destination.transform.eulerAngles.y, 0);
         device.transform.eulerAngles += new Vector3(0, 180, 0);
+        device.GetComponent<DeviceInfo>().isActive = true;
+        device.GetComponent<CharacterController>().enabled = true;
         startedTeleporting = false;
     }
 }
