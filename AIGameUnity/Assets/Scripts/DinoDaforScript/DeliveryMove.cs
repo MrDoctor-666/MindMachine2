@@ -175,8 +175,10 @@ public class DeliveryMove : MonoBehaviour
 
         Debug.DrawRay(fPoint, dir, Color.red);
         Debug.DrawRay(bPoint, dir, Color.red);
+        int wallsLayer = 1 << 12, notRaycast = 1 << 9;
+        int layerMask = ~(wallsLayer);
 
-        if (Physics.Raycast(fPoint, dir, out hit, dist) && Physics.Raycast(bPoint, dir, out hit2, dist))
+        if (Physics.Raycast(fPoint, dir, out hit, dist, layerMask) && Physics.Raycast(bPoint, dir, out hit2, dist, layerMask))
         {
             Vector3 upright = Vector3.Cross(transform.right, -(hit.point - hit2.point).normalized);
             transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, upright));
