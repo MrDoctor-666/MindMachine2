@@ -76,7 +76,7 @@ public class CockroachMove : MonoBehaviour
         CheckAnimation();
         if (cockroachInfo.isActive)
         {
-            deviceInteraction.CheckForInteractionWithSphereCast(onClickDevice.InteractionRadius, 9);
+            deviceInteraction.CheckForInteractionWithSphereCast(onClickDevice.InteractionRadius, 9, 13);
             Cursor.lockState = CursorLockMode.Locked;
 
             if (chController.isGrounded)

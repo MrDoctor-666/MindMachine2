@@ -11,16 +11,18 @@ public class DeviceInteraction : MonoBehaviour
     [SerializeField] float raySphereRadius = 0.5f;
     [SerializeField] string textForWarningDelivery = "��� ������������ �����������. �������������� ������ �����������.";
 
-    public void CheckForInteractionWithSphereCast(float interactDist, int layerNum)
+    public void CheckForInteractionWithSphereCast(float interactDist, int layerNum1, int layerNum2)
     {
-        int layerMask = 1 << layerNum;
-        layerMask = ~layerMask;
+        int layerMask2 = 1 << layerNum2;
+        int layerMask1 = 1 << layerNum1;
+        layerMask1 = layerMask1 | layerMask2;
+        layerMask1 = ~layerMask1;
         Camera cam = GetComponentInChildren<Camera>();
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * 100f, Color.yellow);
 
-        if (Physics.SphereCast(ray, raySphereRadius,out hit, interactDist,layerMask))
+        if (Physics.SphereCast(ray, raySphereRadius,out hit, interactDist,layerMask1))
         {
             InteractableBase interact = hit.transform.GetComponent<InteractableBase>();
             //null or outside of any interaction range
