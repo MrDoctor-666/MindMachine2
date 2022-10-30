@@ -180,8 +180,14 @@ public class DeliveryMove : MonoBehaviour
 
         if (Physics.Raycast(fPoint, dir, out hit, dist, layerMask) && Physics.Raycast(bPoint, dir, out hit2, dist, layerMask))
         {
+            //Debug.Log("First " + hit.collider.gameObject.transform.parent.name);
+            //Debug.Log("Second " + hit2.collider.gameObject.transform.parent.name);
+            //Debug.Log(-(hit.point - hit2.point).normalized);
+            //if ((-(hit.point - hit2.point).normalized).y < -0.7f || (-(hit.point - hit2.point).normalized).y > 0.7f) return;
             Vector3 upright = Vector3.Cross(transform.right, -(hit.point - hit2.point).normalized);
             transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, upright));
+            //Vector3 upright = -(hit.point - hit2.point).normalized;
+            //transform.rotation = Quaternion.LookRotation(upright);
         }
     }
 
